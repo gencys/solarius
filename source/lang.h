@@ -34,7 +34,7 @@ extern char* gl_hot_key2;
 
 extern char* gl_language;
 extern char* gl_en_lang;
-extern char* gl_zh_lang;
+extern char* gl_fr_lang;
 
 extern char* gl_set_btn;
 extern char* gl_ok_btn;
@@ -43,7 +43,6 @@ extern char* gl_formatnor_info1;
 extern char* gl_formatnor_info2;
 
 extern char* temp;
-
 
 extern char* gl_check_sav;
 extern char* gl_make_sav;
@@ -106,8 +105,8 @@ extern char* gl_save_saved;
 extern char* gl_file_exist;
 extern char* gl_file_noexist;
 
-extern char**  	gl_rom_menu;
-extern char**   gl_nor_op;
+extern char** gl_rom_menu;
+extern char** gl_nor_op;
 
 extern char* gl_enabled;
 extern char* gl_disabled;
@@ -119,7 +118,6 @@ extern char* gl_generating_emu;
 extern unsigned char* ASC_DATA;
 
 void LoadEnglish(void);
-void LoadChinese(void);
+void LoadFrench(void);
 
 #endif
-

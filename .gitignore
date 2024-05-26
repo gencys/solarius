@@ -1,3 +1,5 @@
+*.DS_Store
+
 emusrc/build
 *.gba
 *.elf
