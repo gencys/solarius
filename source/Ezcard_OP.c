@@ -20,8 +20,6 @@
 
 const u32 image_bin_size2 = 952016;
 
-extern unsigned char ASC_DATA_OLD[];
-
 extern u32 FAT_table_buffer[FAT_table_size / 4] EWRAM_BSS;
 
 extern u32 key_L;
@@ -456,7 +454,6 @@ void IWRAM_CODE Set_64MROM_flag(u16 flag) {
 // --------------------------------------------------------------------
 
 void IWRAM_CODE Check_FW_update(u16 Current_FW_ver, u16 Built_in_ver) {
-   ASC_DATA = ASC_DATA_OLD;
    vu16 busy;
    vu32 offset;
    u32 offset_Y = 5;
@@ -497,13 +494,13 @@ void IWRAM_CODE Check_FW_update(u16 Current_FW_ver, u16 Built_in_ver) {
    sprintf(msg, "Current firmware version: V%02d", Current_FW_ver);
    DrawHZText12(msg, 0, 2, offset_Y + 1 * line_x, 0x7FFF, 1);
 
-   sprintf(msg, "Please use the OFFICIAl kernel to", Built_in_ver);
+   sprintf(msg, "Please use the OFFICIAl kernel to");
    DrawHZText12(msg, 0, 2, offset_Y + 3 * line_x, 0x7FFF, 1);
 
-   sprintf(msg, "update firmware. Sorry.", Built_in_ver);
+   sprintf(msg, "update firmware. Sorry.");
    DrawHZText12(msg, 0, 2, offset_Y + 4 * line_x, 0x7FFF, 1);
 
-   sprintf(msg, "Press (B) to skip.", Built_in_ver);
+   sprintf(msg, "Press (B) to skip.");
    DrawHZText12(msg, 0, 2, offset_Y + 6 * line_x, 0x7FFF, 1);
 
    while (1) {

@@ -1350,9 +1350,9 @@ void CheckLanguage(void) {
 
    if (gl_select_lang == 0xE1E1)  // english
    {
-      LoadEnglish();
-   } else {
       LoadFrench();
+   } else {
+      LoadEnglish();
    }
 }
 
@@ -2060,8 +2060,12 @@ void Set_saveMODE(BYTE saveMODE) {
    Save_SET_info(SET_info_buffer, 0x200);
 }
 
-// Program entry point
 
+/**
+ * @brief Kernel's main loop, initilizing and drawing the necessary menus.
+ * 
+ * @return int 
+ */
 int main(void) {
    irqInit();
    irqEnable(IRQ_VBLANK);
@@ -2095,13 +2099,13 @@ int main(void) {
    scanKeys();
    u16 keys = keysDown();
 
-   u16 Built_in_ver = 4;  // Newest_FW_ver
-   u16 Current_FW_ver = Read_FPGA_ver();
+   // u16 Built_in_ver = 4;  // Newest_FW_ver
+   // u16 Current_FW_ver = Read_FPGA_ver();
 
-   if ((Current_FW_ver < Built_in_ver) || (Current_FW_ver == 99))  // 99 is test ver
-   {
-      Check_FW_update(Current_FW_ver, Built_in_ver);
-   }
+   // if ((Current_FW_ver < Built_in_ver) || (Current_FW_ver == 99))  // 99 is test ver
+   // {
+   //    Check_FW_update(Current_FW_ver, Built_in_ver);
+   // }
    /*else if(keys & KEY_L) {
       Check_FW_update(Current_FW_ver,Built_in_ver);
    }*/

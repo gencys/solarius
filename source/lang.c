@@ -1,7 +1,6 @@
 #include "lang.h"
 
-#include "asc126_new.h"
-#include "asc126_old.h"
+#include "fnt_cozette.h"
 
 char* gl_init_error;
 char* gl_power_off;
@@ -118,18 +117,19 @@ char* gl_copying_data;
 char* gl_enabled;
 char* gl_disabled;
 
-unsigned char* ASC_DATA;
+unsigned char* GLOBAL_FONT = (unsigned char*)COZETTE_FNT;
+int* FONT_START_CHAR = &COZETTE_START_CHAR;
 
 // French
 const char fr_init_error[] = "Initilization de la carte SD impossible.";
-const char fr_power_off[] = "Eteignez la console.";
-const char fr_init_ok[] = "Initilization de la carte SD reussie.";
+const char fr_power_off[] = "Éteignez la console.";
+const char fr_init_ok[] = "Initilization de la carte SD réussie.";
 const char fr_Loading[] = "Chargement...";
 const char fr_file_overflow[] = "Fichier trop volumineux.";
 
 const char fr_menu_btn[] = " (B)Non     (A)Oui";
-const char fr_writing[] = "Ecriture...";
-const char fr_lastest_game[] = "Selectionnez plus recent";
+const char fr_writing[] = "Écriture...";
+const char fr_lastest_game[] = "Sélectionnez plus récent";
 
 const char fr_time[] = "  Horloge";
 const char fr_Mon[] = "Lun";
@@ -150,44 +150,44 @@ const char fr_hot_key[] = "   Veille";
 const char fr_hot_key2[] = "     Menu";
 
 const char fr_language[] = "   Langue";
-const char fr_lang[] = "Francais";
+const char fr_lang[] = "Français";
 
 const char fr_set_btn[] = "Mod.";
 const char fr_ok_btn[] = " OK";
-const char fr_formatnor_info[] = "Vous etes sur.e?";
-const char fr_formatnor_info2[] = "Ca va etre long.";
+const char fr_formatnor_info[] = "Vous êtes sûr.e?";
+const char fr_formatnor_info2[] = "Ça va être long.";
 
 const char fr_theme_credit[] = "Solarius v1.0";
 const char fr_theme_credit2[] = "by Gencys.";
 
-const char fr_check_sav[] = "Verification sauvegarde...";
-const char fr_make_sav[] = "Creation sauvegarde...";
+const char fr_check_sav[] = "Vérification sauvegarde...";
+const char fr_make_sav[] = "Création sauvegarde...";
 
-const char fr_check_RTS[] = "Verification fichier RTS...";
-const char fr_make_RTS[] = "Creation fichier RTS...";
+const char fr_check_RTS[] = "Vérification fichier RTS...";
+const char fr_make_RTS[] = "Création fichier RTS...";
 
-const char fr_check_pat[] = "Verification fichier Patch...";
-const char fr_make_pat[] = "Creation fichier Patch...";
+const char fr_check_pat[] = "Vérification fichier Patch...";
+const char fr_make_pat[] = "Création fichier Patch...";
 
 const char fr_please_wait[] = "Veuillez patienter...";
 
 const char fr_loading_game[] = "Chargement...";
 
-const char fr_no_roms[] = "Pas de ROM .gba trouve!";
+const char fr_no_roms[] = "Pas de ROM .gba trouvé!";
 
 const char fr_engine[] = "   Engine";
 const char fr_use_engine[] = "Fast Patch Engine";
 
-const char fr_recently_play[] = "Recemment joue";
+const char fr_recently_play[] = "Récemment joué";
 
-const char fr_START_help[] = "Ouvrir liste Recemment joue";
+const char fr_START_help[] = "Ouvrir liste Récemment joué";
 const char fr_SELECT_help[] = "Plus d'options";
-const char fr_L_A_help[] = "Inverser option demarrage";
+const char fr_L_A_help[] = "Inverser option démarrage";
 const char fr_LSTART_help[] = "Suppr. fichier";
 const char fr_LSELECT_help[] = "Suppr. sauvegarde";
 const char fr_online_manual[] = "Manuel online";
 
-const char fr_no_game_played[] = "Pas de jeu lance recemment...";
+const char fr_no_game_played[] = "Pas de jeu lancé récemment...";
 
 const char fr_ingameRTC[] = " Game RTC";
 const char fr_ingameRTC_open[] = "Ouvrir";
@@ -219,11 +219,11 @@ const char fr_led_open[] = "Activer LED";
 const char fr_Breathing_light[] = "Respiration";
 const char fr_SD_working[] = "     SD LED";
 
-const char fr_NOR_full[] = "Memoire NOR pleine !  ";
-const char fr_save_loaded[] = ".sav a ete charge";
-const char fr_save_saved[] = ".sav sauvegarde";
-const char fr_file_exist[] = "Ecraser le fichier?";
-const char fr_file_noexist[] = "Fihier .sav inexistant";
+const char fr_NOR_full[] = "Mémoire NOR pleine !  ";
+const char fr_save_loaded[] = ".sav a été chargé";
+const char fr_save_saved[] = ".sav sauvegardé";
+const char fr_file_exist[] = "Écraser le fichier?";
+const char fr_file_noexist[] = "Fichier .sav inexistant";
 
 const char fr_copying_data[] = "Copie de la ROM...";
 const char fr_generating_emu[] = "Generation Emulateur...";
@@ -397,7 +397,7 @@ void LoadFrench(void) {
    gl_formatnor_info1 = (char*)fr_formatnor_info;
    gl_formatnor_info2 = (char*)fr_formatnor_info2;
 
-   temp = " ";
+   temp = "Sûr? Environ 4 mins";
 
    gl_check_sav = (char*)fr_check_sav;
    gl_make_sav = (char*)fr_make_sav;
@@ -469,8 +469,6 @@ void LoadFrench(void) {
 
    gl_enabled = (char*)fr_enabled;
    gl_disabled = (char*)fr_disabled;
-
-   ASC_DATA = (unsigned char*)ASC_DATA_NEW;
 }
 //---------------------------------------------------------------------------------
 void LoadEnglish(void) {
@@ -584,7 +582,4 @@ void LoadEnglish(void) {
 
    gl_enabled = (char*)en_enabled;
    gl_disabled = (char*)en_disabled;
-
-   // For English, Use new font
-   ASC_DATA = (unsigned char*)ASC_DATA_NEW;
 }

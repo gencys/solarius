@@ -7,10 +7,11 @@
 /* storage control modules to the FatFs module with a defined API.       */
 /*-----------------------------------------------------------------------*/
 
+#include "ff.h"
 #include "diskio.h" /* Declarations of disk functions */
 #include "../Ezcard_OP.h"
 #include "../RTC.h"
-#include "ff.h" /* Obtains integer types */
+ /* Obtains integer types */
 /* Definitions of physical drive number for each drive */
 // #define DEV_RAM		0	/* Example: Map Ramdisk to physical drive 0 */
 // #define DEV_MMC		1	/* Example: Map MMC/SD card to physical drive 1 */

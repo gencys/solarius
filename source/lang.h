@@ -115,7 +115,8 @@ extern char* gl_copying_data;
 extern char* gl_generating_emu;
 
 // ASCII Font
-extern unsigned char* ASC_DATA;
+extern unsigned char* GLOBAL_FONT;
+extern int* FONT_START_CHAR;
 
 void LoadEnglish(void);
 void LoadFrench(void);
