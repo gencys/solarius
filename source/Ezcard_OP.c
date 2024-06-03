@@ -464,7 +464,7 @@ void IWRAM_CODE Check_FW_update(u16 Current_FW_ver, u16 Built_in_ver) {
    Clear(0, 0, 240, 160, RGB(0, 18, 24), 1);
 
    sprintf(msg, "FIRMWARE UPDATE");
-   DrawHZText12(msg, 0, 75, offset_Y + 0 * line_x, 0x7FFF, 1);
+   DrawText(msg, 0, 75, offset_Y + 0 * line_x, 0x7FFF, 1);
 
    // u32 get_crc32 = crc32( image, image_bin_size2);
    // DEBUG_printf("get_crc32 %x ",get_crc32);
@@ -475,9 +475,9 @@ void IWRAM_CODE Check_FW_update(u16 Current_FW_ver, u16 Built_in_ver) {
    /*if(get_crc32 != 0x76352215) //fw4
    {
                    sprintf(msg,"CRC32 checksum error!");
-                   DrawHZText12(msg,0,2,offset_Y+1*line_x, RGB(31,00,00),1);
+                   DrawText(msg,0,2,offset_Y+1*line_x, RGB(31,00,00),1);
                    sprintf(msg,"Press (B) to return");
-                   DrawHZText12(msg,0,2,offset_Y+2*line_x, 0x7FFF,1);
+                   DrawText(msg,0,2,offset_Y+2*line_x, 0x7FFF,1);
                    while(1)
                    {
                            VBlankIntrWait();
@@ -492,16 +492,16 @@ void IWRAM_CODE Check_FW_update(u16 Current_FW_ver, u16 Built_in_ver) {
    }*/
 
    sprintf(msg, "Current firmware version: V%02d", Current_FW_ver);
-   DrawHZText12(msg, 0, 2, offset_Y + 1 * line_x, 0x7FFF, 1);
+   DrawText(msg, 0, 2, offset_Y + 1 * line_x, 0x7FFF, 1);
 
    sprintf(msg, "Please use the OFFICIAl kernel to");
-   DrawHZText12(msg, 0, 2, offset_Y + 3 * line_x, 0x7FFF, 1);
+   DrawText(msg, 0, 2, offset_Y + 3 * line_x, 0x7FFF, 1);
 
    sprintf(msg, "update firmware. Sorry.");
-   DrawHZText12(msg, 0, 2, offset_Y + 4 * line_x, 0x7FFF, 1);
+   DrawText(msg, 0, 2, offset_Y + 4 * line_x, 0x7FFF, 1);
 
    sprintf(msg, "Press (B) to skip.");
-   DrawHZText12(msg, 0, 2, offset_Y + 6 * line_x, 0x7FFF, 1);
+   DrawText(msg, 0, 2, offset_Y + 6 * line_x, 0x7FFF, 1);
 
    while (1) {
       VBlankIntrWait();
@@ -516,14 +516,14 @@ void IWRAM_CODE Check_FW_update(u16 Current_FW_ver, u16 Built_in_ver) {
          Clear(2, offset_Y+5*line_x,220,15,RGB(0,18,24),1);
 
          sprintf(msg,"Progress:");
-         DrawHZText12(msg,0,2,offset_Y+6*line_x, 0x7FFF,1);
+         DrawText(msg,0,2,offset_Y+6*line_x, 0x7FFF,1);
 
          for(offset = 0x0000;offset<newomega_top_bin_size;offset+=256)
          {
 
                  sprintf(msg," %lu%%",(offset*100/newomega_top_bin_size+1));
                  Clear(54, offset_Y+6*line_x,120,15,RGB(0,18,24),1);
-                 DrawHZText12(msg,0,54,offset_Y+6*line_x, 0x7FFF,1);
+                 DrawText(msg,0,54,offset_Y+6*line_x, 0x7FFF,1);
 
                  FAT_table_buffer[0] = (0x80000 + offset);//omega DE 0x80000
 
@@ -541,7 +541,7 @@ void IWRAM_CODE Check_FW_update(u16 Current_FW_ver, u16 Built_in_ver) {
                  //break;
          }
          sprintf(msg,"Update finished, power off the console.");
-         DrawHZText12(msg,0,2,offset_Y+8*line_x, 0x7FFF,1);
+         DrawText(msg,0,2,offset_Y+8*line_x, 0x7FFF,1);
 
          while(1);
          break;

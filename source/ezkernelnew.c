@@ -270,13 +270,13 @@ void Show_ICON_filename_SD(u32 show_offset, u32 file_select, u32 haveThumbnail) 
 
       DrawPic((u16*)(gImage_icon_folder /*gImage_icons+0*16*14*2*/), 0, y_offset + line * 14, 16, 14, 1, 0x0000, 1);
 
-      DrawHZText12(pFolder[show_offset + line].filename, char_num, 1 + 16, y_offset + line * 14, name_color, 1);
+      DrawText(pFolder[show_offset + line].filename, char_num, 1 + 16, y_offset + line * 14, name_color, 1);
 
       if ((haveThumbnail == 1) && (line > 3)) {
       } else {
          char msg[20];
          sprintf(msg, "%s", "DIR");
-         DrawHZText12(msg, 0, 221, y_offset + line * 14, name_color, 1);
+         DrawText(msg, 0, 221, y_offset + line * 14, name_color, 1);
       }
    }
 
@@ -412,12 +412,12 @@ void Show_ICON_filename_SD(u32 show_offset, u32 file_select, u32 haveThumbnail) 
       }
       DrawPic(icon, 0, showy, 16, 14, 1, 0x0000, 1);
 
-      DrawHZText12(pFilename_buffer[offset + line - need_show_folder].filename, char_num, 1 + 16, showy, name_color, 1);
+      DrawText(pFilename_buffer[offset + line - need_show_folder].filename, char_num, 1 + 16, showy, name_color, 1);
       if ((haveThumbnail == 1) && (line > 3)) {
       } else {
          char msg[20];
          Get_file_size(offset + line - need_show_folder, msg);
-         DrawHZText12(msg, 0, 208, showy, name_color, 1);
+         DrawText(msg, 0, 208, showy, name_color, 1);
       }
    }
 }
@@ -567,53 +567,53 @@ void IWRAM_CODE Refresh_filename(u32 show_offset, u32 file_select, u32 updown, u
    }
 
    if ((file_select == (need_show_folder - 1)) && (updown == 3)) {
-      DrawHZText12(pFolder[show_offset + xx1].filename, char_num1, 1 + 16, showy1, name_color1, 1);
-      DrawHZText12(pFilename_buffer[0].filename, char_num2, 1 + 16, showy2, name_color1, 1);
+      DrawText(pFolder[show_offset + xx1].filename, char_num1, 1 + 16, showy1, name_color1, 1);
+      DrawText(pFilename_buffer[0].filename, char_num2, 1 + 16, showy2, name_color1, 1);
 
       if (char_num1 == 32) {
          sprintf(msg, "%s", "DIR");
-         DrawHZText12(msg, 0, 221, showy1, name_color1, 1);
+         DrawText(msg, 0, 221, showy1, name_color1, 1);
       }
       if (char_num2 == 32) {
          Get_file_size(0, msg);
-         DrawHZText12(msg, 0, 208, showy2, name_color1, 1);
+         DrawText(msg, 0, 208, showy2, name_color1, 1);
       }
    } else if (file_select < need_show_folder) {
-      DrawHZText12(pFolder[show_offset + xx1].filename, char_num1, 1 + 16, showy1, name_color1, 1);
-      DrawHZText12(pFolder[show_offset + xx2].filename, char_num2, 1 + 16, showy2, name_color1, 1);
+      DrawText(pFolder[show_offset + xx1].filename, char_num1, 1 + 16, showy1, name_color1, 1);
+      DrawText(pFolder[show_offset + xx2].filename, char_num2, 1 + 16, showy2, name_color1, 1);
 
       sprintf(msg, "%s", "DIR");
       if (char_num1 == 32) {
-         DrawHZText12(msg, 0, 221, showy1, name_color1, 1);
+         DrawText(msg, 0, 221, showy1, name_color1, 1);
       }
       if (char_num2 == 32) {
-         DrawHZText12(msg, 0, 221, showy2, name_color1, 1);
+         DrawText(msg, 0, 221, showy2, name_color1, 1);
       }
    } else if ((file_select == need_show_folder) && (updown == 2)) {
-      DrawHZText12(pFolder[show_offset + xx1].filename, char_num1, 1 + 16, showy1, name_color1, 1);
-      DrawHZText12(pFilename_buffer[0].filename, char_num2, 1 + 16, showy2, name_color1, 1);
+      DrawText(pFolder[show_offset + xx1].filename, char_num1, 1 + 16, showy1, name_color1, 1);
+      DrawText(pFilename_buffer[0].filename, char_num2, 1 + 16, showy2, name_color1, 1);
 
       if (char_num1 == 32) {
          sprintf(msg, "%s", "DIR");
-         DrawHZText12(msg, 0, 221, showy1, name_color1, 1);
+         DrawText(msg, 0, 221, showy1, name_color1, 1);
       }
       if (char_num2 == 32) {
          Get_file_size(0, msg);
-         DrawHZText12(msg, 0, 208, showy2, name_color1, 1);
+         DrawText(msg, 0, 208, showy2, name_color1, 1);
       }
    } else {
-      DrawHZText12(pFilename_buffer[offset + xx1 - need_show_folder].filename, char_num1, 1 + 16, showy1, name_color1,
+      DrawText(pFilename_buffer[offset + xx1 - need_show_folder].filename, char_num1, 1 + 16, showy1, name_color1,
                    1);
-      DrawHZText12(pFilename_buffer[offset + xx2 - need_show_folder].filename, char_num2, 1 + 16, showy2, name_color1,
+      DrawText(pFilename_buffer[offset + xx2 - need_show_folder].filename, char_num2, 1 + 16, showy2, name_color1,
                    1);
 
       if (char_num1 == 32) {
          Get_file_size(offset + xx1 - need_show_folder, msg);
-         DrawHZText12(msg, 0, 208, showy1, name_color1, 1);
+         DrawText(msg, 0, 208, showy1, name_color1, 1);
       }
       if (char_num2 == 32) {
          Get_file_size(offset + xx2 - need_show_folder, msg);
-         DrawHZText12(msg, 0, 208, showy2, name_color1, 1);
+         DrawText(msg, 0, 208, showy2, name_color1, 1);
       }
    }
 }
@@ -638,9 +638,9 @@ void Show_ICON_filename_NOR(u32 show_offset, u32 file_select) {
 
       DrawPic((u16*)gImage_icon_nor /*(gImage_icons+2*16*14*2)*/, 0, y_offset + line * 14, 16, 14, 1, 0x0000, 1);
 
-      DrawHZText12(pNorFS[show_offset + line].filename, char_num, 1 + 16, y_offset + line * 14, name_color, 1);
+      DrawText(pNorFS[show_offset + line].filename, char_num, 1 + 16, y_offset + line * 14, name_color, 1);
       sprintf(msg, "%4luM", pNorFS[show_offset + line].filesize >> 20);
-      DrawHZText12(msg, 0, 208, y_offset + line * 14, name_color, 1);
+      DrawText(msg, 0, 208, y_offset + line * 14, name_color, 1);
    }
 }
 
@@ -678,13 +678,13 @@ void Refresh_filename_NOR(u32 show_offset, u32 file_select, u32 updown) {
       ClearWithBG((u16*)gImage_NOR, 17, 20 + xx2 * 14, clean_len, 13, 1);
    }
 
-   DrawHZText12(pNorFS[show_offset + xx1].filename, char_num, 1 + 16, showy1, name_color1, 1);
-   DrawHZText12(pNorFS[show_offset + xx2].filename, char_num, 1 + 16, showy2, name_color1, 1);
+   DrawText(pNorFS[show_offset + xx1].filename, char_num, 1 + 16, showy1, name_color1, 1);
+   DrawText(pNorFS[show_offset + xx2].filename, char_num, 1 + 16, showy2, name_color1, 1);
 
    sprintf(msg, "%4luM", (pNorFS[show_offset + xx1].filesize) >> 20);
-   DrawHZText12(msg, 0, 208, showy1, name_color1, 1);
+   DrawText(msg, 0, 208, showy1, name_color1, 1);
    sprintf(msg, "%4luM", (pNorFS[show_offset + xx2].filesize) >> 20);
-   DrawHZText12(msg, 0, 208, showy2, name_color1, 1);
+   DrawText(msg, 0, 208, showy2, name_color1, 1);
 }
 
 void Show_game_num(u32 count, u32 list) {
@@ -698,7 +698,7 @@ void Show_game_num(u32 count, u32 list) {
          count = 0;
       sprintf(msg, "[%03lu/%03lu]", count, game_total_NOR);
    }
-   DrawHZText12(msg, 0, 185, 3, gl_color_text, 1);
+   DrawText(msg, 0, 185, 3, gl_color_text, 1);
 }
 
 void Filename_loop(u32 shift, u32 show_offset, u32 file_select, u32 haveThumbnail) {
@@ -759,7 +759,7 @@ void Filename_loop(u32 shift, u32 show_offset, u32 file_select, u32 haveThumbnai
                dwName = 0;
 
             Clear(17, 20 + file_select * 14, (char_num) * 6, 13, gl_color_selectBG_sd, 1);
-            DrawHZText12(msg, char_num - 1, 1 + 16, y_offset + file_select * 14, gl_color_text, 1);
+            DrawText(msg, char_num - 1, 1 + 16, y_offset + file_select * 14, gl_color_text, 1);
          }
       }
    }
@@ -770,7 +770,7 @@ void Show_MENU_btn() {
    Clear(60, 118 - 1, 55, 14, gl_color_MENU_btn, 1);
    Clear(125, 118 - 1, 55, 14, gl_color_MENU_btn, 1);
    sprintf(msg, "%s", gl_menu_btn);
-   DrawHZText12(msg, 0, 60, 118, gl_color_text, 1);
+   DrawText(msg, 0, 60, 118, gl_color_text, 1);
 }
 
 void Show_MENU(u32 menu_select, PAGE_NUM page, u32 havecht, u32 Save_num, u32 is_menu, u32 firstgame) {
@@ -816,14 +816,14 @@ void Show_MENU(u32 menu_select, PAGE_NUM page, u32 havecht, u32 Save_num, u32 is
       }
 
       if (page == NOR_list)
-         DrawHZText12(gl_nor_op[line], 32, 47, y_offset + line * 14, name_color, 1);
+         DrawText(gl_nor_op[line], 32, 47, y_offset + line * 14, name_color, 1);
       else {
          if (line == 5)  // cheat
          {
             sprintf(msg, "%s(%ld)", gl_rom_menu[line], gl_cheat_count);
-            DrawHZText12(msg, 32, 47, y_offset + line * 14, name_color, 1);
+            DrawText(msg, 32, 47, y_offset + line * 14, name_color, 1);
          } else {
-            DrawHZText12(gl_rom_menu[line], 32, 47, y_offset + line * 14, name_color, 1);
+            DrawText(gl_rom_menu[line], 32, 47, y_offset + line * 14, name_color, 1);
 
             if (line == 4)  // save tpye
             {
@@ -849,7 +849,7 @@ void Show_MENU(u32 menu_select, PAGE_NUM page, u32 havecht, u32 Save_num, u32 is
                      break;
                }
                // ClearWithBG((u16*)gImage_MENU -64,60+60, y_offset + line*14, 10*6, 13, 1);
-               DrawHZText12(msg, 32, 60 + 54, y_offset + line * 14, name_color, 1);
+               DrawText(msg, 32, 60 + 54, y_offset + line * 14, name_color, 1);
             }
          }
       }
@@ -879,7 +879,7 @@ void Show_game_name(u32 total, u32 Select) {
          name_color = gl_color_text;
 
       sprintf(msg, "%s", p_recently_play[line]);
-      DrawHZText12(msg, 39, X_offset, Y_offset + line * line_x, name_color, 1);
+      DrawText(msg, 39, X_offset, Y_offset + line * line_x, name_color, 1);
    }
 }
 
@@ -893,7 +893,7 @@ u32 get_count(void) {
       f_lseek(&gfile, 0x0);
       memset(buf, 0x00, 512);
       while (f_gets(buf, 512, &gfile) != NULL) {
-         // DrawHZText12(buf, 32, 1+16, showy, name_color,1);
+         // DrawText(buf, 32, 1+16, showy, name_color,1);
          Trim(buf);
          if (buf[0] != '/')
             break;
@@ -918,7 +918,7 @@ u32 show_recently_play(void) {
    // u32 firsttime = 1;
 
    DrawPic((u16*)gImage_RECENTLY, 0, 0, 240, 160, 0, 0, 1);
-   DrawHZText12(gl_recently_play, 0, (240 - strlen(gl_recently_play) * 6) / 2, 4, gl_color_text, 1);  // TITLE
+   DrawText(gl_recently_play, 0, (240 - strlen(gl_recently_play) * 6) / 2, 4, gl_color_text, 1);  // TITLE
 
    all_count = get_count();
    if (all_count) {
@@ -953,7 +953,7 @@ u32 show_recently_play(void) {
          }
       }
    } else {
-      DrawHZText12(gl_no_game_played, 0, 1, 20, gl_color_text, 1);
+      DrawText(gl_no_game_played, 0, 1, 20, gl_color_text, 1);
       while (1) {
          VBlankIntrWait();
          VBlankIntrWait();
@@ -1316,7 +1316,7 @@ u32 IWRAM_CODE Loadfile2PSRAM(TCHAR* filename) {
       for (blocknum = 0x0000; blocknum < filesize; blocknum += 0x20000) {
          sprintf(msg, "%luMb/%luMb", (blocknum) / 0x20000, filesize / 0x20000);
          Clear(78 + 54, 160 - 15, 110, 15, gl_color_cheat_black, 1);
-         DrawHZText12(msg, 0, 78 + 54, 160 - 15, gl_color_text, 1);
+         DrawText(msg, 0, 78 + 54, 160 - 15, gl_color_text, 1);
          f_read(&gfile, pReadCache, 0x20000, &ret);  // pReadCache max 0x20000 Byte
 
          if ((gl_reset_on == 1) || (gl_rts_on == 1) || (gl_sleep_on == 1) || (gl_cheat_on == 1)) {
@@ -1468,7 +1468,7 @@ void ShowTime(u32 page_num, u32 page_mode) {
       SS = 0;
 
    sprintf(msgtime, "%02u:%02u:%02u", HH, MM, SS);
-   DrawHZText12(msgtime, 0, 120, 3, gl_color_text, 1);
+   DrawText(msgtime, 0, 120, 3, gl_color_text, 1);
 }
 
 void IWRAM_CODE
@@ -1602,7 +1602,7 @@ u32 IWRAM_CODE LoadEMU2PSRAM(TCHAR* filename, u32 is_EMU) {
             sprintf(msg, "%luMb", (blocknum) / 0x20000);
             str_len = strlen(msg);
             Clear(0, 130, 240, 15, gl_color_cheat_black, 1);
-            DrawHZText12(msg, 0, (240 - str_len * 6) / 2, 160 - 30, 0x7fff, 1);
+            DrawText(msg, 0, (240 - str_len * 6) / 2, 160 - 30, 0x7fff, 1);
             // f_lseek(&gfile, blocknum);
             if (filesize - blocknum * 0x20000 < 0x20000)
                memset(pReadCache, 0, 0x20000);
@@ -1645,7 +1645,7 @@ u32 IWRAM_CODE LoadEMU2PSRAM(TCHAR* filename, u32 is_EMU) {
       }
 
       Clear(60, 160 - 15, 120, 15, gl_color_cheat_black, 1);
-      DrawHZText12(gl_writing, 0, 78, 160 - 15, 0x7fff, 1);
+      DrawText(gl_writing, 0, 78, 160 - 15, 0x7fff, 1);
 
       f_lseek(&gfile, 0x0000);
       ShowbootProgress(gl_generating_emu);
@@ -1653,7 +1653,7 @@ u32 IWRAM_CODE LoadEMU2PSRAM(TCHAR* filename, u32 is_EMU) {
          sprintf(msg, "%luMb", (blocknum + blockoffset) / 0x20000);
          str_len = strlen(msg);
          Clear(0, 130, 240, 15, gl_color_cheat_black, 1);
-         DrawHZText12(msg, 0, (240 - str_len * 6) / 2, 160 - 30, 0x7fff, 1);
+         DrawText(msg, 0, (240 - str_len * 6) / 2, 160 - 30, 0x7fff, 1);
          // f_lseek(&gfile, blocknum);
          if (filesize - blocknum * 0x20000 < 0x20000)
             memset(pReadCache, 0, 0x20000);
@@ -1776,10 +1776,10 @@ void SD_list_L_START(u32 show_offset, u32 file_select, u32 folder_total) {
    DrawPic((u16*)gImage_MENU, 36, 25, 168, 110, 1, 0, 1);  // show menu pic
    Show_MENU_btn();
 
-   DrawHZText12(gl_LSTART_help, 0, 60, 60, gl_color_text, 1);  // use sure?gl_LSTART_help
-   DrawHZText12(pFilename_buffer[show_offset + file_select - folder_total].filename, 20, 60, 75, 0x7fff,
+   DrawText(gl_LSTART_help, 0, 60, 60, gl_color_text, 1);  // use sure?gl_LSTART_help
+   DrawText(pFilename_buffer[show_offset + file_select - folder_total].filename, 20, 60, 75, 0x7fff,
                 1);                                  // file name
-   DrawHZText12(temp, 5, 60, 90, gl_color_text, 1);  // use sure?
+   DrawText(temp, 5, 60, 90, gl_color_text, 1);  // use sure?
    while (1) {
       VBlankIntrWait();
       scanKeys();
@@ -1867,7 +1867,7 @@ void Show_error_num(u8 error_num) {
          break;
    }
 
-   DrawHZText12(msg, 0, 90, 2, RGB(31, 00, 00), 1);
+   DrawText(msg, 0, 90, 2, RGB(31, 00, 00), 1);
    wait_btn();
 }
 
@@ -2006,14 +2006,14 @@ void Check_save_flag(void) {
       }
       DrawPic((u16*)gImage_MENU, 36, 25, 168, 110, 1, 0, 1);  // show menu pic
 
-      DrawHZText12(gl_save_sav, 0, 47, 28, gl_color_text, 1);                    // use sure?gl_LSTART_help
-      DrawHZText12((TCHAR*)SAV_info_buffer, 20, 47, 40, gl_color_text, 1);       // file name
-      DrawHZText12((TCHAR*)SAV_info_buffer + 20, 20, 47, 52, gl_color_text, 1);  // file name
-      DrawHZText12((TCHAR*)SAV_info_buffer + 40, 20, 47, 64, gl_color_text, 1);  // file name
-      // DrawHZText12(gl_formatnor_info,5,60,90,gl_color_text,1);//use sure?
+      DrawText(gl_save_sav, 0, 47, 28, gl_color_text, 1);                    // use sure?gl_LSTART_help
+      DrawText((TCHAR*)SAV_info_buffer, 20, 47, 40, gl_color_text, 1);       // file name
+      DrawText((TCHAR*)SAV_info_buffer + 20, 20, 47, 52, gl_color_text, 1);  // file name
+      DrawText((TCHAR*)SAV_info_buffer + 40, 20, 47, 64, gl_color_text, 1);  // file name
+      // DrawText(gl_formatnor_info,5,60,90,gl_color_text,1);//use sure?
 
       if (gl_auto_save_sel) {
-         DrawHZText12(gl_save_ing, 0, 47, 88, gl_color_text, 1);  // use sure?gl_LSTART_help
+         DrawText(gl_save_ing, 0, 47, 88, gl_color_text, 1);  // use sure?gl_LSTART_help
          f_mkdir(SAVER_FOLDER);                                   //"/SAVER"
          f_chdir(SAVER_FOLDER);
          Save_savefile((TCHAR*)SAV_info_buffer, savefilesize);
@@ -2024,7 +2024,7 @@ void Check_save_flag(void) {
             scanKeys();
             u16 keysdown = keysDown();
             if (keysdown & KEY_A) {
-               DrawHZText12(gl_save_ing, 0, 60, 88, gl_color_text, 1);  // use sure?gl_LSTART_help
+               DrawText(gl_save_ing, 0, 60, 88, gl_color_text, 1);  // use sure?gl_LSTART_help
                f_mkdir(SAVER_FOLDER);
                f_chdir(SAVER_FOLDER);
                Save_savefile((TCHAR*)SAV_info_buffer, savefilesize);
@@ -2116,13 +2116,13 @@ int main(void) {
 
    res = f_mount(&EZcardFs, "", 1);
    if (res != FR_OK) {
-      DrawHZText12(gl_init_error, 0, 2, 20, gl_color_cheat_black, 1);
-      DrawHZText12(gl_power_off, 0, 2, 33, gl_color_cheat_black, 1);
+      DrawText(gl_init_error, 0, 2, 20, gl_color_cheat_black, 1);
+      DrawText(gl_power_off, 0, 2, 33, gl_color_cheat_black, 1);
       while (1)
          ;
    } else {
-      DrawHZText12(gl_init_ok, 0, 2, 20, gl_color_cheat_black, 1);
-      DrawHZText12(gl_Loading, 0, 2, 33, gl_color_cheat_black, 1);
+      DrawText(gl_init_ok, 0, 2, 20, gl_color_cheat_black, 1);
+      DrawText(gl_Loading, 0, 2, 33, gl_color_cheat_black, 1);
    }
    VBlankIntrWait();
 
@@ -2529,7 +2529,7 @@ void Boot_NOR_game(u32 show_offset, u32 file_select, u32 key_L) {
    u32 res;
 
    Clear(0, 0, 240, 160, gl_color_cheat_black, 1);
-   // DrawHZText12(gl_Loading,0,(240-strlen(gl_Loading)*6)/2,74, gl_color_text,1);
+   // DrawText(gl_Loading,0,(240-strlen(gl_Loading)*6)/2,74, gl_color_text,1);
 
    init_FAT_table();
 
@@ -2612,14 +2612,14 @@ u8 FRAM_save_op(u8 OP) {
          f_close(&gfile);
          Bank_Switching(0);
          res = Loadsavefile(savfilename);
-         DrawHZText12(gl_save_loaded, 0, 66, 118 - 15, RGB(00, 31, 00), 1);
+         DrawText(gl_save_loaded, 0, 66, 118 - 15, RGB(00, 31, 00), 1);
       } else {
-         DrawHZText12(gl_file_noexist, 0, 66, 118 - 15, RGB(31, 00, 00), 1);
+         DrawText(gl_file_noexist, 0, 66, 118 - 15, RGB(31, 00, 00), 1);
       }
    } else if (OP == 2) {  // bak fram save
       if (res == FR_OK)   // have a old save file
       {
-         DrawHZText12(gl_file_exist, 0, 66, 118 - 15, RGB(31, 00, 00), 1);
+         DrawText(gl_file_exist, 0, 66, 118 - 15, RGB(31, 00, 00), 1);
          while (1) {
             VBlankIntrWait();
             scanKeys();
@@ -2636,7 +2636,7 @@ u8 FRAM_save_op(u8 OP) {
       }
       savefilesize = Get_savefilesize(SAVEMODE);
       Save_savefile(savfilename, savefilesize);
-      DrawHZText12(gl_save_saved, 0, 66, 118 - 15, RGB(00, 31, 00), 1);
+      DrawText(gl_save_saved, 0, 66, 118 - 15, RGB(00, 31, 00), 1);
    }
    wait_btn();
    return 0;
@@ -2707,7 +2707,7 @@ u8 NOR_list_MENU(u32 show_offset, u32 file_select) {
             if (show_offset + file_select + 1 == game_total_NOR) {
                Block_Erase(gl_norOffset - pNorFS[show_offset + file_select].filesize);
             } else {
-               DrawHZText12(gl_lastest_game, 0, 66, 118 - 15, gl_color_text, 1);
+               DrawText(gl_lastest_game, 0, 66, 118 - 15, gl_color_text, 1);
                wait_btn();
             }
             return 1;
@@ -2873,7 +2873,7 @@ re_show_menu:
 load_file:
 
    Clear(0, 0, 240, 160, gl_color_cheat_black, 1);
-   // DrawHZText12(gl_Loading,0,(240-strlen(gl_Loading)*6)/2,74, gl_color_text,1);
+   // DrawText(gl_Loading,0,(240-strlen(gl_Loading)*6)/2,74, gl_color_text,1);
 
    u32 gamefilesize = 0;
    // u32 savefilesize=0;
@@ -3040,7 +3040,7 @@ load_file:
                return 2;
             } else if (res == 2) {
                Clear(0, 160 - 15, 200, 15, gl_color_cheat_black, 1);
-               DrawHZText12(gl_NOR_full, 0, 0, 160 - 15, gl_color_NORFULL, 1);  //"NOR FULL!"
+               DrawText(gl_NOR_full, 0, 0, 160 - 15, gl_color_NORFULL, 1);  //"NOR FULL!"
                wait_btn();
                return 1;
             }
@@ -3076,7 +3076,7 @@ load_file:
                return 2;
             } else if (res == 2) {
                Clear(0, 160 - 15, 200, 15, gl_color_cheat_black, 1);
-               DrawHZText12(gl_NOR_full, 0, 0, 160 - 15, gl_color_NORFULL, 1);  //"NOR FULL!"
+               DrawText(gl_NOR_full, 0, 0, 160 - 15, gl_color_NORFULL, 1);  //"NOR FULL!"
                wait_btn();
                return 0;
             }

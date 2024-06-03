@@ -95,7 +95,7 @@ void Chip_Erase() {
       DrawPic((u16*)(gImage_MENU + 78 * 128 * 2), 56, 90 + 13, 128, 13, 0, 0, 1);  // show menu pic
 
       itoa(count, msg, 2);
-      DrawHZText12(msg, 0, 60, 90 + 13, gl_color_text, 1);
+      DrawText(msg, 0, 60, 90 + 13, gl_color_text, 1);
       count++;
 
       VBlankIntrWait();
@@ -110,7 +110,7 @@ void FormatNor() {
    char msg[128];
    sprintf(msg, "%s", gl_formatnor_info1);
 
-   DrawHZText12(msg, 0, 60, 90 + 13, gl_color_text, 1);
+   DrawText(msg, 0, 60, 90 + 13, gl_color_text, 1);
 
    while (1) {
       delay(500);
@@ -269,11 +269,11 @@ u32 Loadfile2NOR(TCHAR* filename, u32 NORaddress, u16 have_patch, u8 SAVEMODE) {
       dmaCopy(&tmpNorFS, &pNorFS[game_total_NOR], sizeof(FM_NOR_FS));
 
       Clear(60, 160 - 15, 120, 15, gl_color_cheat_black, 1);
-      DrawHZText12(gl_writing, 0, 70, 160 - 15, 0x7fff, 1);
+      DrawText(gl_writing, 0, 70, 160 - 15, 0x7fff, 1);
       for (blocknum = 0; blocknum < filesize; blocknum += 0x20000) {
          sprintf(msg, "%luMb/%luMb", (blocknum) / 0x20000, filesize / 0x20000);
          Clear(70 + 54, 160 - 15, 100, 15, gl_color_cheat_black, 1);
-         DrawHZText12(msg, 0, 70 + 54, 160 - 15, 0x7fff, 1);
+         DrawText(msg, 0, 70 + 54, 160 - 15, 0x7fff, 1);
          Block_Erase(blocknum + NORaddress);
 
          f_lseek(&gfile, blocknum);

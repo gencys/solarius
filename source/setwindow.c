@@ -132,51 +132,51 @@ u32 Setting_window(void) {
       if (re_show) {
          //
          sprintf(msg, "%s", gl_time);
-         DrawHZText12(msg, 0, set_offset, y_offset, gl_color_selected, 1);
+         DrawText(msg, 0, set_offset, y_offset, gl_color_selected, 1);
 
          //
          sprintf(msg, "%s", gl_addon);
-         DrawHZText12(msg, 0, set_offset, y_offset + line_x, gl_color_selected, 1);
+         DrawText(msg, 0, set_offset, y_offset + line_x, gl_color_selected, 1);
 
          Draw_select_icon(x_offset, y_offset + line_x, v_reset);
          sprintf(msg, "%s", gl_reset);
-         DrawHZText12(msg, 0, x_offset + 15, y_offset + line_x, (addon_sel == 0) ? gl_color_selected : gl_color_text,
+         DrawText(msg, 0, x_offset + 15, y_offset + line_x, (addon_sel == 0) ? gl_color_selected : gl_color_text,
                       1);
 
          Draw_select_icon(x_offset + 12 * 6, y_offset + line_x, v_rts);
          sprintf(msg, "%s", gl_rts);
-         DrawHZText12(msg, 0, x_offset + 12 * 6 + 15, y_offset + line_x,
+         DrawText(msg, 0, x_offset + 12 * 6 + 15, y_offset + line_x,
                       (addon_sel == 1) ? gl_color_selected : gl_color_text, 1);
          VBlankIntrWait();
          Draw_select_icon(x_offset, y_offset + line_x * 2, v_sleep);
          sprintf(msg, "%s", gl_sleep);
-         DrawHZText12(msg, 0, x_offset + 15, y_offset + line_x * 2,
+         DrawText(msg, 0, x_offset + 15, y_offset + line_x * 2,
                       (addon_sel == 3) ? gl_color_selected : gl_color_text, 1);
          VBlankIntrWait();
          Draw_select_icon(x_offset + 12 * 6, y_offset + line_x * 2, v_cheat);
          sprintf(msg, "%s", gl_cheat);
-         DrawHZText12(msg, 0, x_offset + 12 * 6 + 15, y_offset + line_x * 2,
+         DrawText(msg, 0, x_offset + 12 * 6 + 15, y_offset + line_x * 2,
                       (addon_sel == 4) ? gl_color_selected : gl_color_text, 1);
 
          //
          sprintf(msg, "%s", gl_language);
-         DrawHZText12(msg, 0, set_offset, y_offset + line_x * 3, gl_color_selected, 1);
+         DrawText(msg, 0, set_offset, y_offset + line_x * 3, gl_color_selected, 1);
          Draw_select_icon(x_offset, y_offset + line_x * 3, (language_sel == 0x0));
          Draw_select_icon(x_offset + 12 * 6, y_offset + line_x * 3, (language_sel == 0x1));
          sprintf(msg, "%s", gl_en_lang);
-         DrawHZText12(msg, 0, x_offset + 15, y_offset + line_x * 3,
+         DrawText(msg, 0, x_offset + 15, y_offset + line_x * 3,
                       ((language_sel == 0) && currstate && (2 == select)) ? gl_color_selected : gl_color_text, 1);
          sprintf(msg, "%s", gl_fr_lang);
-         DrawHZText12(msg, 0, x_offset + 12 * 6 + 15, y_offset + line_x * 3,
+         DrawText(msg, 0, x_offset + 12 * 6 + 15, y_offset + line_x * 3,
                       ((language_sel == 1) && currstate && (2 == select)) ? gl_color_selected : gl_color_text, 1);
 
          //
          VBlankIntrWait();
          sprintf(msg, "%s", gl_engine);
-         DrawHZText12(msg, 0, set_offset, y_offset + line_x * 4, gl_color_selected, 1);
+         DrawText(msg, 0, set_offset, y_offset + line_x * 4, gl_color_selected, 1);
          Draw_select_icon(x_offset, y_offset + line_x * 4, (engine_sel == 0x1));
          sprintf(msg, "%s", gl_use_engine);
-         DrawHZText12(msg, 0, x_offset + 15, y_offset + line_x * 4,
+         DrawText(msg, 0, x_offset + 15, y_offset + line_x * 4,
                       (engine_pos == 0) ? gl_color_selected : gl_color_text, 1);
          //
 
@@ -184,21 +184,21 @@ u32 Setting_window(void) {
          ClearWithBG((u16*)gImage_SET, set_offset, y_offset + line_x * 6, 9 * 6, 13, 1);
          if ((v_rts == 1) && (v_cheat == 0) && (v_reset == 0) && (v_sleep == 0)) {
             sprintf(msg, "%s", " SAVE KEY");
-            DrawHZText12(msg, 0, set_offset, y_offset + line_x * 5, gl_color_selected, 1);
+            DrawText(msg, 0, set_offset, y_offset + line_x * 5, gl_color_selected, 1);
 
             sprintf(msg, "%s", " LOAD KEY");
-            DrawHZText12(msg, 0, set_offset, y_offset + line_x * 6, gl_color_selected, 1);
+            DrawText(msg, 0, set_offset, y_offset + line_x * 6, gl_color_selected, 1);
          } else {
             sprintf(msg, "%s", gl_hot_key);
-            DrawHZText12(msg, 0, set_offset, y_offset + line_x * 5, gl_color_selected, 1);
+            DrawText(msg, 0, set_offset, y_offset + line_x * 5, gl_color_selected, 1);
 
             sprintf(msg, "%s", gl_hot_key2);
-            DrawHZText12(msg, 0, set_offset, y_offset + line_x * 6, gl_color_selected, 1);
+            DrawText(msg, 0, set_offset, y_offset + line_x * 6, gl_color_selected, 1);
          }
 
          // RTC
          sprintf(msg, "%s", gl_ingameRTC);
-         DrawHZText12(msg, 0, set_offset, y_offset + line_x * 7, gl_color_selected, 1);
+         DrawText(msg, 0, set_offset, y_offset + line_x * 7, gl_color_selected, 1);
          Draw_select_icon(x_offset, y_offset + line_x * 7, (gl_ingame_RTC_open_status == 0x1));
          // sprintf(msg,"%s",gl_offRTC_powersave);
          ClearWithBG((u16*)gImage_SET, x_offset + 15, y_offset + line_x * 7, 6 * 6, 13, 1);
@@ -207,7 +207,7 @@ u32 Setting_window(void) {
          } else {
             sprintf(msg, "%s", gl_disabled);
          }
-         DrawHZText12(msg, 0, x_offset + 15, y_offset + line_x * 7, (RTC_pos == 0) ? gl_color_selected : gl_color_text,
+         DrawText(msg, 0, x_offset + 15, y_offset + line_x * 7, (RTC_pos == 0) ? gl_color_selected : gl_color_text,
                       1);
 
          u32 offsety;
@@ -245,7 +245,7 @@ u32 Setting_window(void) {
             } else {
                sprintf(msg, "%s", gl_set_btn);
             }
-            DrawHZText12(msg, 0, 200 + 5, offsety, gl_color_text, 1);
+            DrawText(msg, 0, 200 + 5, offsety, gl_color_text, 1);
             VBlankIntrWait();
          }
       }
@@ -303,7 +303,7 @@ u32 Setting_window(void) {
 
             sprintf(msg, "%u/%02u/%02u %02d:%02d:%02d %s", UNBCD(datetime[0]) + 2000, month, day, HH, MM, SS, wkday);
             ClearWithBG((u16*)gImage_SET, x_offset, y_offset, 22 * 6, 13, 1);
-            DrawHZText12(msg, 0, x_offset, y_offset, gl_color_text, 1);
+            DrawText(msg, 0, x_offset, y_offset, gl_color_text, 1);
             VBlankIntrWait();
 
             u16 read5 = Read_SET_info(assress_edit_sleephotkey_0);
@@ -415,7 +415,7 @@ u32 Setting_window(void) {
                   break;
             }
             sprintf(msg, "%s %s  %s", str0, str1, str2);  // read from flash
-            DrawHZText12(msg, 0, x_offset + 10, y_offset + line_x * 5, gl_color_text, 1);
+            DrawText(msg, 0, x_offset + 10, y_offset + line_x * 5, gl_color_text, 1);
             u16 read8 = Read_SET_info(assress_edit_rtshotkey_0);
             u16 read9 = Read_SET_info(assress_edit_rtshotkey_1);
             u16 read10 = Read_SET_info(assress_edit_rtshotkey_2);
@@ -525,7 +525,7 @@ u32 Setting_window(void) {
                   break;
             }
             sprintf(msg, "%s %s  %s", str0, str1, str2);
-            DrawHZText12(msg, 0, x_offset + 10, y_offset + line_x * 6, gl_color_text, 1);
+            DrawText(msg, 0, x_offset + 10, y_offset + line_x * 6, gl_color_text, 1);
 
             re_show = 0;
             scanKeys();
@@ -640,7 +640,7 @@ u32 Setting_window(void) {
                   }
                   sprintf(msg, "20%02d/%02d/%02d %02d:%02d:%02d %s", edit_datetime[_YEAR], edit_datetime[_MONTH],
                           edit_datetime[_DAY], edit_datetime[_HOUR], edit_datetime[_MIN], edit_datetime[_SEC], wkday);
-                  DrawHZText12(msg, 0, x_offset, y_offset, gl_color_text, 1);
+                  DrawText(msg, 0, x_offset, y_offset, gl_color_text, 1);
                } else if (select == 4) {
                   ClearWithBG((u16*)gImage_SET, x_offset, y_offset + line_x * 5, 23 * 6, 13, 1);
                   switch (sleep_pos) {
@@ -764,7 +764,7 @@ u32 Setting_window(void) {
                         break;
                   }
                   sprintf(msg, "%s %s  %s", str0, str1, str2);
-                  DrawHZText12(msg, 0, x_offset + 10, y_offset + line_x * 5, gl_color_text, 1);
+                  DrawText(msg, 0, x_offset + 10, y_offset + line_x * 5, gl_color_text, 1);
                } else if (select == 5) {
                   ClearWithBG((u16*)gImage_SET, x_offset, y_offset + line_x * 6, 23 * 6, 13, 1);
                   switch (rtshotkey_pos) {
@@ -887,7 +887,7 @@ u32 Setting_window(void) {
                         break;
                   }
                   sprintf(msg, "%s %s  %s", str0, str1, str2);
-                  DrawHZText12(msg, 0, x_offset + 10, y_offset + line_x * 6, gl_color_text, 1);
+                  DrawText(msg, 0, x_offset + 10, y_offset + line_x * 6, gl_color_text, 1);
                }
             }
             re_show = 0;

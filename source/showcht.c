@@ -433,7 +433,7 @@ void Show_KEY_val(u32 total, u32 Select, u32 showoffset) {
          // sprintf(msg,"%s ",buffer_temp);
          //}
 
-         DrawHZText12(msg, 30, X_offset + 13, Y_offset + line * line_x, name_color, 1);
+         DrawText(msg, 30, X_offset + 13, Y_offset + line * line_x, name_color, 1);
       } else {
          VBlankIntrWait();
          Draw_select_icon(X_offset + 13, Y_offset + line * line_x, select);
@@ -448,9 +448,9 @@ void Show_KEY_val(u32 total, u32 Select, u32 showoffset) {
                  sprintf(msg,"%s ",buffer_temp);
          }*/
 
-         DrawHZText12(msg, 30, X_offset + 15 + 13, Y_offset + line * line_x, name_color, 1);
+         DrawText(msg, 30, X_offset + 15 + 13, Y_offset + line * line_x, name_color, 1);
          // sprintf(msg,"%s",((FM_CHT_LINE*)pCHTbuffer)[showoffset+line].KEY_val);
-         // DrawHZText12(msg,20,X_offset+15+13+60,Y_offset+line*line_x,name_color,1);
+         // DrawText(msg,20,X_offset+15+13+60,Y_offset+line*line_x,name_color,1);
       }
    }
 }
@@ -710,7 +710,7 @@ void Show_num(u32 totalcount, u32 select) {
    ClearWithBG((u16*)gImage_RECENTLY, 186, 3, 7 * 6, 15, 1);
    sprintf(msg, "[%03lu/%03lu]", select, totalcount);
 
-   DrawHZText12(msg, 0, 182, 3, gl_color_text, 1);
+   DrawText(msg, 0, 182, 3, gl_color_text, 1);
 }
 //------------------------------------------------------------------
 void Open_cht_file(TCHAR* gamefilename, u32 havecht) {
@@ -746,7 +746,7 @@ void Open_cht_file(TCHAR* gamefilename, u32 havecht) {
       Get_KEY_val(&gfile, "GameInfo", "Name", buffer);
       sprintf(msg, "%s ", buffer);
 
-      DrawHZText12(msg, 30, 2, 4, gl_color_text, 1);
+      DrawText(msg, 30, 2, 4, gl_color_text, 1);
 
       u32 all_count = Get_all_Section_val(&gfile);
       u32 Select = 1;

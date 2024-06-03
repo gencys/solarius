@@ -127,7 +127,7 @@ void IWRAM_CODE DrawPic(u16* GFX, u16 x, u16 y, u16 w, u16 h, u8 isTrans, u16 tc
  * @param c
  * @param isDrawDirect
  */
-void DrawHZText12(char* str, u16 len, u16 x, u16 y, u16 c, u8 isDrawDirect) {
+void DrawText(char* str, u16 len, u16 x, u16 y, u16 c, u8 isDrawDirect) {
    u32 i, l, hi = 0;
    u32 location;
    u8 cc, c1, c2;
@@ -219,7 +219,7 @@ void DrawHZText12(char* str, u16 len, u16 x, u16 y, u16 c, u8 isDrawDirect) {
 //       Clear(0, 0, 240, 160, 0x0000, 1);
 //    }
 
-//    DrawHZText12(str, 0, 0, current_y, RGB(31, 31, 31), 1);
+//    DrawText(str, 0, 0, current_y, RGB(31, 31, 31), 1);
 
 //    // free(str);
 
@@ -238,6 +238,6 @@ void DrawHZText12(char* str, u16 len, u16 x, u16 y, u16 c, u8 isDrawDirect) {
 void ShowbootProgress(char* str) {
    u8 str_len = strlen(str);
    Clear(0, 160 - 15, 240, 15, gl_color_cheat_black, 1);
-   DrawHZText12(gl_loading_game, 0, (240 - strlen(gl_loading_game) * 6) / 2, 72, 0x7FFF, 1);
-   DrawHZText12(str, 0, (240 - str_len * 6) / 2, 160 - 15, 0x7FFF, 1);
+   DrawText(gl_loading_game, 0, (240 - strlen(gl_loading_game) * 6) / 2, 72, 0x7FFF, 1);
+   DrawText(str, 0, (240 - str_len * 6) / 2, 160 - 15, 0x7FFF, 1);
 }
