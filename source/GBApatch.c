@@ -808,7 +808,7 @@ u32 Check_RTS(TCHAR* gamefilename) {
       f_close(&gfile);
    } else  // make a new one
    {
-      ShowbootProgress(gl_make_RTS);
+      ShowbootProgress(MESSAGES[L_CREATE_RTS]);
       res = f_open(&gfile, rtsnamebuf, FA_WRITE | FA_OPEN_ALWAYS);
       if (res == FR_OK) {
          int i;

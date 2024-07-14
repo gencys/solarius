@@ -27,14 +27,14 @@ extern u8 pReadCache[MAX_pReadCache_size] EWRAM_BSS;
 /**
  * @brief Clears the read cache with a color and draws the color on the screen.
  *
- * @param x The horizontal offsst at which to start drawing.
+ * @param x The horizontal offset at which to start drawing.
  * @param y The vertical offset at which to start drawing.
- * @param w The width in pixels to draw.
- * @param h The height in pixels to draw
- * @param c The RGB color to draw.
+ * @param width The width in pixels to draw.
+ * @param height The height in pixels to draw
+ * @param color The RGB color to draw.
  * @param isDrawDirect Flag to draw the directly on screen on not in the Vcache.
  */
-void IWRAM_CODE Clear(u16 x, u16 y, u16 w, u16 h, u16 c, u8 isDrawDirect) {
+void IWRAM_CODE Clear(u16 x, u16 y, u16 width, u16 height, u16 color, u8 isDrawDirect) {
    u16* p;
    u16 yi, ww, hh;
 
@@ -43,28 +43,28 @@ void IWRAM_CODE Clear(u16 x, u16 y, u16 w, u16 h, u16 c, u8 isDrawDirect) {
    else
       p = Vcache;
 
-   hh = (y + h > 160) ? 160 : (y + h);
-   ww = (x + w > 240) ? (240 - x) : w;
+   hh = (y + height > 160) ? 160 : (y + height);
+   ww = (x + width > 240) ? (240 - x) : width;
 
    // u16 tmp[240];
    for (u32 i = 0; i < 240; i++)
-      ((u16*)pReadCache)[i] = c;
+      ((u16*)pReadCache)[i] = color;
 
    for (yi = y; yi < hh; yi++)
       dmaCopy(pReadCache, p + yi * 240 + x, ww * 2);
 }
 
 /**
- * @brief
+ * @brief Draws the given background image.
  *
- * @param pbg
- * @param x
- * @param y
- * @param w
- * @param h
- * @param isDrawDirect
+ * @param pbg Pointer to the background image to draw.
+ * @param x The horizontal coordinate at which to start drawing.
+ * @param y The vertical coordinate at which to start drawing.
+ * @param width The width to draw.
+ * @param height The height to draw.
+ * @param isDrawDirect Flag to write the image to video buffer or the cache.
  */
-void IWRAM_CODE ClearWithBG(u16* pbg, u16 x, u16 y, u16 w, u16 h, u8 isDrawDirect) {
+void IWRAM_CODE ClearWithBG(u16* pbg, u16 x, u16 y, u16 width, u16 height, u8 isDrawDirect) {
    u16* p;
    u16 yi, ww, hh;
 
@@ -73,26 +73,26 @@ void IWRAM_CODE ClearWithBG(u16* pbg, u16 x, u16 y, u16 w, u16 h, u8 isDrawDirec
    else
       p = Vcache;
 
-   hh = (y + h > 160) ? 160 : (y + h);
-   ww = (x + w > 240) ? (240 - x) : w;
+   hh = (y + height > 160) ? 160 : (y + height);
+   ww = (x + width > 240) ? (240 - x) : width;
 
    for (yi = y; yi < hh; yi++)
       dmaCopy(pbg + yi * 240 + x, p + yi * 240 + x, ww * 2);
 }
 
 /**
- * @brief
+ * @brief Draws the given image, removing the transparency color if wanted.
  *
- * @param GFX
- * @param x
- * @param y
- * @param w
- * @param h
- * @param isTrans
- * @param tcolor
- * @param isDrawDirect
+ * @param GFX Pointer to the image to draw.
+ * @param x The horizontal coordinate at which to start drawing.
+ * @param y The vertical coordinate at which to start drawing.
+ * @param width The width of the image to draw.
+ * @param height The height of the image to draw.
+ * @param isTrans Flag if parts of the image should be transparent.
+ * @param tcolor The color in the image should be considered as transparent.
+ * @param isDrawDirect Flag to write the image to the video buffer or the cache.
  */
-void IWRAM_CODE DrawPic(u16* GFX, u16 x, u16 y, u16 w, u16 h, u8 isTrans, u16 tcolor, u8 isDrawDirect) {
+void IWRAM_CODE DrawPic(u16* GFX, u16 x, u16 y, u16 width, u16 height, u8 isTrans, u16 tcolor, u8 isDrawDirect) {
    u16 *p, c;
    u16 xi, yi, ww, hh;
 
@@ -101,33 +101,36 @@ void IWRAM_CODE DrawPic(u16* GFX, u16 x, u16 y, u16 w, u16 h, u8 isTrans, u16 tc
    else
       p = Vcache;
 
-   hh = (y + h > 160) ? 160 : (y + h);
-   ww = (x + w > 240) ? (240 - x) : w;
+   hh = (y + height > 160) ? 160 : (y + height);
+   ww = (x + width > 240) ? (240 - x) : width;
 
-   if (isTrans) {
+   if (isTrans)
+   {
       for (yi = y; yi < hh; yi++)
          for (xi = x; xi < x + ww; xi++) {
-            c = GFX[(yi - y) * w + (xi - x)];
+            c = GFX[(yi - y) * width + (xi - x)];
             if (c != tcolor)
                p[yi * 240 + xi] = c;
          }
-   } else {
+   }
+   else 
+   {
       for (yi = y; yi < hh; yi++)
-         dmaCopy(GFX + (yi - y) * w, p + yi * 240 + x, w * 2);
+         dmaCopy(GFX + (yi - y) * width, p + yi * 240 + x, width * 2);
    }
 }
 
 /**
- * @brief
+ * @brief Draws the given text on the screen by drawing it pixel by pixel.
  *
- * @param str
- * @param len
- * @param x
- * @param y
- * @param c
- * @param isDrawDirect
+ * @param str The string to display on screen.
+ * @param len The length of the string (optional).
+ * @param x The horizontal coordinate at which to start writing the string.
+ * @param y The vertical coordiante at which to start writing the string.
+ * @param color The color in which to write the string.
+ * @param isDrawDirect Flag to draw the image directly in the video buffer or the cache.
  */
-void DrawText(char* str, u16 len, u16 x, u16 y, u16 c, u8 isDrawDirect) {
+void DrawText(char* str, u16 len, u16 x, u16 y, u16 color, u8 isDrawDirect) {
    u32 i, l, hi = 0;
    u32 location;
    u8 cc, c1, c2;
@@ -135,7 +138,6 @@ void DrawText(char* str, u16 len, u16 x, u16 y, u16 c, u8 isDrawDirect) {
    u16* p1 = Vcache;
    u16* p2 = VideoBuffer;
    u16 yy;
-   char msg[20];
 
    if (isDrawDirect)
       v = p2;
@@ -150,21 +152,28 @@ void DrawText(char* str, u16 len, u16 x, u16 y, u16 c, u8 isDrawDirect) {
    if ((u16)(len * 6) > (u16)(240 - x))
       len = (240 - x) / 6;
 
-   while (hi < l) {
+   while (hi < l)
+   {
       c1 = str[hi];
       hi++;
       if (c1 < *FONT_START_CHAR)
          continue;
 
-      if (c1 < 0x80)  // ASCII
+      if (c1 < 0x80)
       {
+         // Get location of ASCII character
          location = (c1 - *FONT_START_CHAR) * 13;
       }
       else if (!(c1 >> 5 & 1))
       {
+         // Get location of Extended-ASCII character
          c2 = str[hi];
          hi++;
          location = ((((c1 & 0x1F) << 6) | (c2 & 0x3F)) - *FONT_START_CHAR) * 13;
+      }
+      else
+      {
+         break;
       }
 
       yy = 240 * y;
@@ -178,17 +187,17 @@ void DrawText(char* str, u16 len, u16 x, u16 y, u16 c, u8 isDrawDirect) {
          }
 
          if (cc & 0x01)
-            v[x + 5 + yy] = c;
+            v[x + 5 + yy] = color;
          if (cc & 0x02)
-            v[x + 4 + yy] = c;
+            v[x + 4 + yy] = color;
          if (cc & 0x04)
-            v[x + 3 + yy] = c;
+            v[x + 3 + yy] = color;
          if (cc & 0x08)
-            v[x + 2 + yy] = c;
+            v[x + 2 + yy] = color;
          if (cc & 0x10)
-            v[x + 1 + yy] = c;
+            v[x + 1 + yy] = color;
          if (cc & 0x20)
-            v[x + yy] = c;
+            v[x + yy] = color;
          // The width of cozette is 6px so we can skip the two MSBs
          // if (cc & 0x40)
          //    v[x + 1 + yy] = c;
@@ -238,6 +247,6 @@ void DrawText(char* str, u16 len, u16 x, u16 y, u16 c, u8 isDrawDirect) {
 void ShowbootProgress(char* str) {
    u8 str_len = strlen(str);
    Clear(0, 160 - 15, 240, 15, gl_color_cheat_black, 1);
-   DrawText(gl_loading_game, 0, (240 - strlen(gl_loading_game) * 6) / 2, 72, 0x7FFF, 1);
+   DrawText(MESSAGES[L_LOAD_ROM], 0, (240 - strlen(MESSAGES[L_LOAD_ROM]) * 6) / 2, 72, 0x7FFF, 1);
    DrawText(str, 0, (240 - str_len * 6) / 2, 160 - 15, 0x7FFF, 1);
 }

@@ -1,9 +1,17 @@
 #define MAX_pReadCache_size 0x20000
-#define MAX_files 0x200
-#define MAX_folder 0x100
+#define MAX_FILES 0x200
+#define MAX_FOLDER 0x100
 #define MAX_NOR 0x40
 
-#define MAX_path_len 0x100
+#ifndef true
+#define true 1
+#endif
+
+#ifndef false
+#define false 0
+#endif
+
+#define MAX_PATH_LEN 0x100
 
 #define FAT_table_size 0x400
 // #define FAT_table_SAV_offset 0x200
@@ -41,6 +49,8 @@
 #define SET_info_offset 0x7B0000
 
 #define SAVER_FOLDER "/SYSTEM/SAVER"
+#define RECENT_FILE "/SYSTEM/RECENT.TXT"
+#define BACKUP_SAVER "/BACKUP/SAVER"
 
 #define DMA_COPY_MODE 0X1
 #define SET_PARAMETER_MODE 0x2

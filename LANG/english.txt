@@ -1,0 +1,92 @@
+Failed to initialize microSD card.
+Power off the console.
+microSD card initialization successful.
+Loading...
+The file is too big.
+ (B) No     (A) OK
+Writing...
+Select the lastest
+     Time
+Mon
+Tue
+Wed
+Thu
+Fri
+Sat
+Sun
+    Addon
+Reset
+Savestate
+Sleep
+Cheat
+Sleep key
+ Menu key
+ Language
+Set
+ OK
+Are you sure?
+This will take a while.
+Sure? About 4 mins
+Checking Save Data...
+Creating Save Data...
+Checking RTS file...
+Creating RTS file...
+Checking Patch file...
+Creating Patch file...
+Please Wait...
+Loading ROM...
+No .gba ROMs found!
+   Engine
+Fast Patch Engine
+Recently Played
+Open recently played list
+More options
+Invert cold start option
+Delete file
+Delete save file
+Online manual
+No recently played games yet...
+ Game RTC
+Open
+Close
+HardReset
+Backup
+Folder error
+File error
+SAVER error
+Save error
+Read save error
+Make save error
+RTS file error
+Copy game save?
+Saving...
+     Save
+Auto save
+   Mode B
+Rumble
+RAM
+Cart
+      LED
+Enable LED
+Breathing
+   SD LED
+NOR is full!          
+.sav has been loaded
+.sav has been saved
+Overwrite file?
+Can't find .sav file
+Copying ROM...
+Generating Emulator...
+Enabled
+Disabled
+Clean boot
+Boot with addon
+Write to NOR clean
+Write to NOR with addon
+Save type
+Cheat
+Direct boot
+Delete
+Format all
+Load save data
+Save save data

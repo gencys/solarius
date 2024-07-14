@@ -120,40 +120,40 @@ u32 Setting_window2(void) {
       if (re_show) {
          //
          VBlankIntrWait();
-         sprintf(msg, "%s", gl_save);
+         sprintf(msg, "%s", MESSAGES[L_SAVE]);
          DrawText(msg, 0, set_offset, y_offset + line_x * 0, gl_color_selected, 1);
          Draw_select_icon(x_offset, y_offset + line_x * 0, (auto_save_sel == 0x1));
-         sprintf(msg, "%s", gl_auto_save);
+         sprintf(msg, "%s", MESSAGES[L_AUTO_SAVE]);
          DrawText(msg, 0, x_offset + 15, y_offset + line_x * 0,
                       (auto_save_pos == 0) ? gl_color_selected : gl_color_text, 1);
 
-         sprintf(msg, "%s", gl_modeB_INITstr);
+         sprintf(msg, "%s", MESSAGES[L_MODE_B]);
          DrawText(msg, 0, set_offset, y_offset + line_x * 1, gl_color_selected, 1);
 
          Draw_select_icon(x_offset, y_offset + line_x * 1, (ModeB_INIT == 0x0));
-         sprintf(msg, "%s", gl_modeB_RUMBLE);
+         sprintf(msg, "%s", MESSAGES[L_RUMBLE]);
          DrawText(msg, 0, x_offset + 15, y_offset + line_x * 1,
                       (ModeB_pos == 0) ? gl_color_selected : gl_color_text, 1);
 
          Draw_select_icon(x_offset + 9 * 6, y_offset + line_x * 1, (ModeB_INIT == 0x1));
-         sprintf(msg, "%s", gl_modeB_RAM);
+         sprintf(msg, "%s", MESSAGES[L_RAM]);
          DrawText(msg, 0, x_offset + 9 * 6 + 15, y_offset + line_x * 1,
                       (ModeB_pos == 1) ? gl_color_selected : gl_color_text, 1);
 
          Draw_select_icon(x_offset + 17 * 6, y_offset + line_x * 1, (ModeB_INIT == 0x2));
-         sprintf(msg, "%s", gl_modeB_LINK);
+         sprintf(msg, "%s", MESSAGES[L_CART]);
          DrawText(msg, 0, x_offset + 17 * 6 + 15, y_offset + line_x * 1,
                       (ModeB_pos == 2) ? gl_color_selected : gl_color_text, 1);
 
-         sprintf(msg, "%s", gl_led);
+         sprintf(msg, "%s", MESSAGES[L_LED]);
          DrawText(msg, 0, set_offset, y_offset + line_x * 2, gl_color_selected, 1);
          Draw_select_icon(x_offset, y_offset + line_x * 2, (led_open_sel == 0x1));
-         sprintf(msg, "%s", gl_led_open);
+         sprintf(msg, "%s", MESSAGES[L_ENABLE_LED]);
          DrawText(msg, 0, x_offset + 15, y_offset + line_x * 2, (led_pos == 0) ? gl_color_selected : gl_color_text,
                       1);
 
          if (led_open_sel == 0x1) {
-            sprintf(msg, "%s", gl_Breathing_light);
+            sprintf(msg, "%s", MESSAGES[L_BREATHE_LED]);
             DrawText(msg, 0, set_offset, y_offset + line_x * 3, gl_color_selected, 1);
 
             Draw_select_icon(x_offset, y_offset + line_x * 3, (Breathing_R == 0x1));
@@ -171,7 +171,7 @@ u32 Setting_window2(void) {
             DrawText(msg, 0, x_offset + 5 * 6 + 5 * 6 + 15 + 15 + 15, y_offset + line_x * 3,
                          (led_pos == 4) ? gl_color_selected : gl_color_text, 1);
 
-            sprintf(msg, "%s", gl_SD_working);
+            sprintf(msg, "%s", MESSAGES[L_SD_LED]);
             DrawText(msg, 0, set_offset, y_offset + line_x * 4, gl_color_selected, 1);
             // Draw_select_icon(x_offset,y_offset+line_x*4,(led_open_sel == 0x1));
 
@@ -195,26 +195,26 @@ u32 Setting_window2(void) {
             line_total = 5;
          }
 
-         sprintf(msg, "%s", gl_lang_toggle_reset);
+         sprintf(msg, "%s", MESSAGES[L_HARDRESET]);
          DrawText(msg, 0, set_offset, y_offset + line_x * 5, gl_color_selected, 1);
          Draw_select_icon(x_offset, y_offset + line_x * 5, (toggle_reset == 0x1));
          ClearWithBG((u16*)gImage_SET, x_offset + 15, y_offset + line_x * 5, 7 * 7, 13, 1);
          if (gl_toggle_reset) {
-            sprintf(msg, "%s", gl_enabled);
+            sprintf(msg, "%s", MESSAGES[L_ENABLED]);
          } else {
-            sprintf(msg, "%s", gl_disabled);
+            sprintf(msg, "%s", MESSAGES[L_DISABLED]);
          }
          DrawText(msg, 0, x_offset + 15, y_offset + line_x * 5,
                       (reset_pos == 0) ? gl_color_selected : gl_color_text, 1);
 
-         sprintf(msg, "%s", gl_lang_toggle_backup);
+         sprintf(msg, "%s", MESSAGES[L_BACKUP]);
          DrawText(msg, 0, set_offset, y_offset + line_x * 6, gl_color_selected, 1);
          Draw_select_icon(x_offset, y_offset + line_x * 6, (toggle_backup == 0x1));
          ClearWithBG((u16*)gImage_SET, x_offset + 15, y_offset + line_x * 6, 7 * 7, 13, 1);
          if (gl_toggle_backup) {
-            sprintf(msg, "%s", gl_enabled);
+            sprintf(msg, "%s", MESSAGES[L_ENABLED]);
          } else {
-            sprintf(msg, "%s", gl_disabled);
+            sprintf(msg, "%s", MESSAGES[L_DISABLED]);
          }
          DrawText(msg, 0, x_offset + 15, y_offset + line_x * 6,
                       (backup_pos == 0) ? gl_color_selected : gl_color_text, 1);
@@ -248,9 +248,9 @@ u32 Setting_window2(void) {
             Clear(202, offsety - 2, 30, 14, clean_color, 1);
 
             if (Set_OK && (line == Set_OK_line)) {
-               sprintf(msg, "%s", gl_ok_btn);
+               sprintf(msg, "%s", MESSAGES[L_OK]);
             } else {
-               sprintf(msg, "%s", gl_set_btn);
+               sprintf(msg, "%s", MESSAGES[L_SET]);
             }
             DrawText(msg, 0, 200 + 5, offsety, gl_color_text, 1);
             VBlankIntrWait();

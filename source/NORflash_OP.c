@@ -14,6 +14,8 @@
 #include "ez_define.h"
 #include "ezkernel.h"
 #include "lang.h"
+
+#include "utils.h"
 // #define DEBUG
 
 extern FM_NOR_FS pNorFS[MAX_NOR] EWRAM_BSS;
@@ -108,7 +110,7 @@ void Chip_Erase() {
 //-----------------------------------------------------------
 void FormatNor() {
    char msg[128];
-   sprintf(msg, "%s", gl_formatnor_info1);
+   sprintf(msg, "%s", MESSAGES[L_DISCLAIMER_OK]);
 
    DrawText(msg, 0, 60, 90 + 13, gl_color_text, 1);
 
@@ -269,7 +271,7 @@ u32 Loadfile2NOR(TCHAR* filename, u32 NORaddress, u16 have_patch, u8 SAVEMODE) {
       dmaCopy(&tmpNorFS, &pNorFS[game_total_NOR], sizeof(FM_NOR_FS));
 
       Clear(60, 160 - 15, 120, 15, gl_color_cheat_black, 1);
-      DrawText(gl_writing, 0, 70, 160 - 15, 0x7fff, 1);
+      DrawText(MESSAGES[L_WRITING], 0, 70, 160 - 15, 0x7fff, 1);
       for (blocknum = 0; blocknum < filesize; blocknum += 0x20000) {
          sprintf(msg, "%luMb/%luMb", (blocknum) / 0x20000, filesize / 0x20000);
          Clear(70 + 54, 160 - 15, 100, 15, gl_color_cheat_black, 1);

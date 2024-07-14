@@ -14,6 +14,8 @@
 #include "ez_define.h"
 #include "ezkernel.h"
 
+#include "utils.h"
+
 // #include "fw.h"
 
 #include "lang.h"
@@ -454,8 +456,6 @@ void IWRAM_CODE Set_64MROM_flag(u16 flag) {
 // --------------------------------------------------------------------
 
 void IWRAM_CODE Check_FW_update(u16 Current_FW_ver, u16 Built_in_ver) {
-   vu16 busy;
-   vu32 offset;
    u32 offset_Y = 5;
    u32 line_x = 17;
    char msg[100];

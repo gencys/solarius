@@ -9,6 +9,7 @@
 #include "draw.h"
 #include "ezkernel.h"
 #include "showcht.h"
+#include "utils.h"
 
 FM_CHT_LINE tmpCHTFS;
 
@@ -26,17 +27,7 @@ extern FIL gfile;
 char buf[MAX_BUF_LEN] EWRAM_BSS;
 char _paramv[MAX_BUF_LEN] EWRAM_BSS;
 extern void Draw_select_icon(u32 X, u32 Y, u32 mode);
-//------------------------------------------------------------------
-//------------------------------------------------------------------
-void Trim(char s[]) {
-   int n;
-   for (n = strlen(s) - 1; n >= 0; n--) {
-      if (s[n] != ' ' && s[n] != '\t' && s[n] != '\n')
-         break;
-      s[n] = '\0';
-   }
-}
-//------------------------------------------------------------------
+
 void Get_KEY_val(FIL* file, char* KEY_section, char* KEY_secval, char getbuff[]) {
    int text_comment = 0;
 
@@ -47,7 +38,7 @@ void Get_KEY_val(FIL* file, char* KEY_section, char* KEY_secval, char getbuff[])
 
    f_lseek(&gfile, 0x0);
    while (f_gets(buf, MAX_KEY_LEN, &gfile) != NULL) {
-      Trim(buf);
+      trim(buf);
       // to skip text comment with flags /* ...*/
       if (buf[0] != '#' && (buf[0] != '/' || buf[1] != '/')) {
          if (strstr(buf, "/*") != NULL) {
@@ -146,7 +137,7 @@ u32 Get_CHT_val(FIL* file, char* KEY_section, char* KEY_secval /*,char getbuff[]
 
    f_lseek(&gfile, 0x0);
    while (f_gets(buf, MAX_BUF_LEN, &gfile) != NULL) {
-      Trim(buf);
+      trim(buf);
       // to skip text comment with flags /* ...*/
       if (buf[0] != '#' && (buf[0] != '/' || buf[1] != '/')) {
          if (strstr(buf, "/*") != NULL) {
@@ -227,7 +218,7 @@ u32 Get_CHT_val(FIL* file, char* KEY_section, char* KEY_secval /*,char getbuff[]
          if (strcmp(KEY_secval, _paramk) == 0) {
             // 0111 Multi-line
             while (f_gets(buf, MAX_BUF_LEN, &gfile) != NULL) {
-               Trim(buf);
+               trim(buf);
                // to skip text comment with flags /* ...*/
                if (buf[0] != '#' && (buf[0] != '/' || buf[1] != '/')) {
                   if (strstr(buf, "/*") != NULL) {
@@ -287,7 +278,7 @@ u32 Get_all_Section_val(FIL* file) {
    f_lseek(&gfile, 0x0);
    while (f_gets(buf, MAX_sectionVAL_LEN, &gfile) != NULL) {
       memset(tmpCHTFS.LINEname, 0x00, MAX_KEY_LEN);
-      Trim(buf);
+      trim(buf);
       // to skip text comment with flags /* ...*/
       if (buf[0] == '-' && buf[1] == '-')
          break;

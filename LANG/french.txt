@@ -1,0 +1,92 @@
+Initilization de la carte SD impossible.
+Éteignez la console.
+Initilization de la carte SD réussie.
+Chargement...
+Fichier trop volumineux.
+ (B)Non     (A)Oui
+Écriture...
+Sélectionnez plus récent
+  Horloge
+Lun
+Mar
+Mer
+Jeu
+Ven
+Sam
+Dim
+    Addon
+Reset
+Savestate
+Veille
+Cheat
+   Veille
+     Menu
+   Langue
+Mod.
+ OK
+Vous êtes sûr.e?
+Ça va être long.
+Sûr? Environ 4 mins
+Vérification sauvegarde...
+Création sauvegarde...
+Vérification fichier RTS...
+Création fichier RTS...
+Vérification fichier Patch...
+Création fichier Patch...
+Veuillez patienter...
+Chargement...
+Pas de ROM .gba trouvé!
+   Engine
+Fast Patch Engine
+Récemment joué
+Ouvrir liste Récemment joué
+Plus d'options
+Inverser option démarrage
+Suppr. fichier
+Suppr. sauvegarde
+Manuel online
+Pas de jeu lancé récemment...
+ Game RTC
+Ouvrir
+Fermer
+HardReset
+Backup
+Erreur dossier
+Erreur fichier
+Erreur SAVER
+Erreur sauvegarde
+Erreur lecture sauvegarde
+Erreur de sauvegarde
+Erreur fichier RTS
+Copier la sauvegarde?
+Sauvegarde...
+   Sauver
+Sauvegarde auto
+   Mode B
+Rumble
+RAM
+Cart
+      LED
+Activer LED
+Respiration
+     SD LED
+Mémoire NOR pleine !  
+.sav a été chargé
+.sav sauvegardé
+Écraser le fichier?
+Fichier .sav inexistant
+Copie de la ROM...
+Generation Emulateur...
+Activer
+Desactiver
+Lancer
+Lancer avec addon
+Copier vers NOR
+Copier vers NOR (addon)
+Type sauv.
+Cheat
+Lancer
+Supprimer
+Tout formater
+Charger la sauvergarde
+Copier la sauvegarde
