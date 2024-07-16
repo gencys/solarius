@@ -48,8 +48,8 @@
 #define NOR_info_offset 0x7A0000
 #define SET_info_offset 0x7B0000
 
-#define SAVER_FOLDER "/SYSTEM/SAVER"
-#define RECENT_FILE "/SYSTEM/RECENT.TXT"
+#define SAVER_FOLDER "/backend/SAVER"
+#define RECENT_FILE "/backend/RECENT.TXT"
 #define BACKUP_SAVER "/BACKUP/SAVER"
 
 #define DMA_COPY_MODE 0X1

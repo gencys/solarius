@@ -941,13 +941,13 @@ u32 show_recently_play(void) {
 }
 
 void Make_recently_play_file(TCHAR* path, TCHAR* gamefilename) {
-   u32 res;
+   int res;
    u32 i;
    u32 count;
    int get = 1;
    char buf[512];
 
-   // res=f_chdir("/SYSTEM");
+   // res=f_chdir("/backend");
    // is in SAVER
    count = get_count();
 
@@ -983,16 +983,24 @@ void Make_recently_play_file(TCHAR* path, TCHAR* gamefilename) {
          }
       }
    }
+
    dmaCopy(buf, &(p_recently_play[0]), 512);  // write first one
 
-   res = f_open(&gfile, "/SYSTEM/RECENT.txt", FA_WRITE | FA_OPEN_ALWAYS);
-   if (res == FR_OK) {
-      f_lseek(&gfile, 0x0000);
-      for (i = 0; i < count + 1; i++) {
-         res = f_printf(&gfile, "%s\n", p_recently_play[i]);
-      }
-      f_close(&gfile);
+   res = f_open(&gfile, "/backend/RECENT.txt", FA_WRITE | FA_OPEN_ALWAYS);
+   if (res != FR_OK) {
+      return;
    }
+   f_lseek(&gfile, 0x0000);
+   for (i = 0; i < count + 1; i++) {
+      res = f_printf(&gfile, "%s\n", &(p_recently_play[i]));
+      if (res < 0)
+      {
+         ShowbootProgress("Error adding recent");
+         break;
+      }
+   }
+
+   f_close(&gfile);
 }
 
 void init_FAT_table(void) {
@@ -1321,9 +1329,9 @@ void CheckLanguage(void) {
    }
    u8 res;
    if (gl_select_lang == 0xE1E1)  // english
-      res = load_language("/SYSTEM/LANG/english.txt");
+      res = load_language("/backend/LANG/english.txt");
    else
-      res = load_language("/SYSTEM/LANG/french.txt");
+      res = load_language("/backend/LANG/french.txt");
 
    if (!res)
       DrawText("Error while reading lang file.", 30, 1, 80, gl_color_text, true);
@@ -1737,7 +1745,7 @@ u32 Load_Thumbnail(TCHAR* pfilename_pic) {
    f_close(&gfile);
 
    memset(picpath, 00, 30);
-   sprintf(picpath, "/SYSTEM/IMGS/%c/%c/%c%c%c%c.bmp", GAMECODE[0], GAMECODE[1], GAMECODE[0], GAMECODE[1], GAMECODE[2], GAMECODE[3]);
+   sprintf(picpath, "/backend/IMGS/%c/%c/%c%c%c%c.bmp", GAMECODE[0], GAMECODE[1], GAMECODE[0], GAMECODE[1], GAMECODE[2], GAMECODE[3]);
 
    res = f_open(&gfile, picpath, FA_READ);
    if (res != FR_OK)
@@ -1782,19 +1790,19 @@ u32 Check_file_type(TCHAR* pfilename) {
 
    ext++;
 
-   sprintf(plugin, "/SYSTEM/PLUG/%s.bin", ext);
+   sprintf(plugin, "/backend/PLUG/%s.bin", ext);
    res = f_stat(plugin, NULL);
    if (res == FR_OK)
       return 4;
-   sprintf(plugin, "/SYSTEM/PLUG/%s.gba", ext);
+   sprintf(plugin, "/backend/PLUG/%s.gba", ext);
    res = f_stat(plugin, NULL);
    if (res == FR_OK)
       return 5;
-   sprintf(plugin, "/SYSTEM/PLUG/%s.mb", ext);
+   sprintf(plugin, "/backend/PLUG/%s.mb", ext);
    res = f_stat(plugin, NULL);
    if (res == FR_OK)
       return 6;
-   sprintf(plugin, "/SYSTEM/PLUG/%s.mbz", ext);
+   sprintf(plugin, "/backend/PLUG/%s.mbz", ext);
    res = f_stat(plugin, NULL);
    if (res == FR_OK)
       return 7;
@@ -2104,8 +2112,8 @@ int main(void) {
    }
    VBlankIntrWait();
 
-   Check_save_flag();
    CheckLanguage();
+   Check_save_flag();
    f_chdir("/");
    // TCHAR currentpath[MAX_PATH_LEN];
    memset(currentpath, 0x00, MAX_PATH_LEN);
