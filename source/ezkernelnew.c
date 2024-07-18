@@ -46,8 +46,6 @@
 #include "light/icon_chip.h"
 #endif
 
-#include "Chinese_manual.h"
-#include "English_manual.h"
 #include "icon_CV.h"
 #include "icon_EXE.h"
 #include "icon_FC.h"
@@ -947,7 +945,7 @@ void Make_recently_play_file(TCHAR* path, TCHAR* gamefilename) {
    int get = 1;
    char buf[512];
 
-   // res=f_chdir("/backend");
+   // res=f_chdir("/.config");
    // is in SAVER
    count = get_count();
 
@@ -986,7 +984,7 @@ void Make_recently_play_file(TCHAR* path, TCHAR* gamefilename) {
 
    dmaCopy(buf, &(p_recently_play[0]), 512);  // write first one
 
-   res = f_open(&gfile, "/backend/RECENT.txt", FA_WRITE | FA_OPEN_ALWAYS);
+   res = f_open(&gfile, "/.config/RECENT.txt", FA_WRITE | FA_OPEN_ALWAYS);
    if (res != FR_OK) {
       return;
    }
@@ -1329,9 +1327,9 @@ void CheckLanguage(void) {
    }
    u8 res;
    if (gl_select_lang == 0xE1E1)  // english
-      res = load_language("/backend/LANG/english.txt");
+      res = load_language("/.config/LANG/english.txt");
    else
-      res = load_language("/backend/LANG/french.txt");
+      res = load_language("/.config/LANG/french.txt");
 
    if (!res)
       DrawText("Error while reading lang file.", 30, 1, 80, gl_color_text, true);
@@ -1745,7 +1743,7 @@ u32 Load_Thumbnail(TCHAR* pfilename_pic) {
    f_close(&gfile);
 
    memset(picpath, 00, 30);
-   sprintf(picpath, "/backend/IMGS/%c/%c/%c%c%c%c.bmp", GAMECODE[0], GAMECODE[1], GAMECODE[0], GAMECODE[1], GAMECODE[2], GAMECODE[3]);
+   sprintf(picpath, "/.config/IMGS/%c/%c/%c%c%c%c.bmp", GAMECODE[0], GAMECODE[1], GAMECODE[0], GAMECODE[1], GAMECODE[2], GAMECODE[3]);
 
    res = f_open(&gfile, picpath, FA_READ);
    if (res != FR_OK)
@@ -1790,19 +1788,19 @@ u32 Check_file_type(TCHAR* pfilename) {
 
    ext++;
 
-   sprintf(plugin, "/backend/PLUG/%s.bin", ext);
+   sprintf(plugin, "/.config/PLUG/%s.bin", ext);
    res = f_stat(plugin, NULL);
    if (res == FR_OK)
       return 4;
-   sprintf(plugin, "/backend/PLUG/%s.gba", ext);
+   sprintf(plugin, "/.config/PLUG/%s.gba", ext);
    res = f_stat(plugin, NULL);
    if (res == FR_OK)
       return 5;
-   sprintf(plugin, "/backend/PLUG/%s.mb", ext);
+   sprintf(plugin, "/.config/PLUG/%s.mb", ext);
    res = f_stat(plugin, NULL);
    if (res == FR_OK)
       return 6;
-   sprintf(plugin, "/backend/PLUG/%s.mbz", ext);
+   sprintf(plugin, "/.config/PLUG/%s.mbz", ext);
    res = f_stat(plugin, NULL);
    if (res == FR_OK)
       return 7;

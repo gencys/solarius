@@ -23,12 +23,7 @@ void Show_ver(void) {
 //---------------------------------------------------------------------------------
 void Show_help_window() {
    Show_ver();
-   if (gl_select_lang == 0xE1E1)  // english
-   {
-      DrawPic((u16*)gImage_English_manual, 240 - 70, 160 - 70, 70, 70, 0, 0, 1);  //
-   } else {
-      DrawPic((u16*)gImage_Chinese_manual, 240 - 70, 160 - 70, 70, 70, 0, 0, 1);  //
-   }
+
    DrawText("Start  :", 0, 3, 20, gl_color_selected, 1);
    DrawText(MESSAGES[L_RECENT_LIST], 0, 52, 20, gl_color_text, 1);
 
@@ -40,8 +35,6 @@ void Show_help_window() {
 
    DrawText("L+Start:", 0, 3, 65, gl_color_selected, 1);
    DrawText(MESSAGES[L_DEL_FILE], 0, 52, 65, gl_color_text, 1);
-
-   DrawText(MESSAGES[L_MANUAL], 0, 240 - 70 - 7, 77, gl_color_text, 1);
 
    DrawText(CREDIT_1, 0, 4, 105, gl_color_selected, 1);
    DrawText(CREDIT_2, 0, 4, 120, gl_color_selected, 1);

@@ -138,7 +138,7 @@ u32 Setting_window(void) {
 
          //
          sprintf(msg, "%s", MESSAGES[L_ADDON]);
-         DrawText("No error here", 0, set_offset, y_offset + line_x, gl_color_selected, 1);
+         DrawText(msg, 0, set_offset, y_offset + line_x, gl_color_selected, 1);
 
          Draw_select_icon(x_offset, y_offset + line_x, v_reset);
          sprintf(msg, "%s", MESSAGES[L_RESET]);

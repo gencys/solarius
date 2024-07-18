@@ -629,7 +629,7 @@ u32 Check_pat(TCHAR* gamefilename) {
 
    TCHAR patnamebuf[100];
    make_pat_name(patnamebuf, gamefilename);
-   res = f_chdir("/backend/PATCH");
+   res = f_chdir("/.config/PATCH");
    if (res == FR_OK) {
       res = f_open(&gfile, patnamebuf, FA_READ);
 
@@ -668,8 +668,8 @@ void Make_pat_file(TCHAR* gamefilename) {
    u32 written;
    u32 w_buffer[16];
 
-   res = f_mkdir("/backend/PATCH");
-   res = f_chdir("/backend/PATCH");
+   res = f_mkdir("/.config/PATCH");
+   res = f_chdir("/.config/PATCH");
 
    memset(w_buffer, 0x00, sizeof(w_buffer));
 
@@ -719,7 +719,7 @@ u8 Check_mde_file(TCHAR* gamefilename) {
    TCHAR mdenamebuf[100];
    make_mde_name(mdenamebuf, gamefilename);
 
-   res = f_chdir("/backend/SAVER");
+   res = f_chdir("/.config/SAVER");
    if (res == FR_OK) {
       res = f_open(&gfile, mdenamebuf, FA_OPEN_EXISTING);
 
@@ -794,8 +794,8 @@ u32 Check_RTS(TCHAR* gamefilename) {
    rtsnamebuf[len - 2] = 't';
    rtsnamebuf[len - 1] = 's';
 
-   res = f_mkdir("/backend/RTS");
-   res = f_chdir("/backend/RTS");
+   res = f_mkdir("/.config/RTS");
+   res = f_chdir("/.config/RTS");
    if (res != FR_OK) {
       return 0;
    }

@@ -48,9 +48,9 @@
 #define NOR_info_offset 0x7A0000
 #define SET_info_offset 0x7B0000
 
-#define SAVER_FOLDER "/backend/SAVER"
-#define RECENT_FILE "/backend/RECENT.TXT"
-#define BACKUP_SAVER "/BACKUP/SAVER"
+#define SAVER_FOLDER "/.config/SAVER"
+#define RECENT_FILE "/.config/RECENT.TXT"
+#define BACKUP_SAVER "/.config/BACKUP/SAVER"
 
 #define DMA_COPY_MODE 0X1
 #define SET_PARAMETER_MODE 0x2
@@ -87,8 +87,6 @@
 #define newomega_top_bin_size 0x535bc  ////0x536d0//0x534A8//
 #define newomega_top_bin_address (void*)0x08195000
 
-extern const unsigned char gImage_English_manual[9800] __attribute__((aligned(4)));
-extern const unsigned char gImage_Chinese_manual[9800] __attribute__((aligned(4)));
 extern const unsigned char gImage_HELP[76800] __attribute__((aligned(4)));
 extern const unsigned char gImage_icons[1344] __attribute__((aligned(4)));
 extern const unsigned char gImage_MENU[36960] __attribute__((aligned(4)));
