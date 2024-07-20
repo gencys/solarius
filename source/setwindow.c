@@ -13,6 +13,16 @@
 
 #include "utils.h"
 
+#ifdef DARK
+#include "dark/left_arr.h"
+#include "dark/right_arr.h"
+#define T_COLOR 0x0000
+#else
+#include "light/left_arr.h"
+#include "light/right_arr.h"
+#define T_COLOR 0x7FFF
+#endif
+
 // extern const unsigned char __attribute__((aligned(4)))gImage_SET[76800];
 extern u16 gl_select_lang;
 extern u16 gl_engine_sel;
@@ -104,11 +114,11 @@ u32 Setting_window(void) {
 
    u32 line_x = 17;
 
-   if (gl_select_lang == 0xE1E1) {
+   if (gl_select_lang < 0 || gl_select_lang > N_LANGUAGES - 1)
       language_sel = 0;
-   } else {
-      language_sel = 1;
-   }
+   else
+      language_sel = gl_select_lang;
+
    v_reset = Read_SET_info(assress_v_reset);
    v_rts = Read_SET_info(assress_v_rts);
    v_sleep = Read_SET_info(assress_v_sleep);
@@ -131,7 +141,8 @@ u32 Setting_window(void) {
    while (1) {
       VBlankIntrWait();
 
-      if (re_show) {
+      if (re_show)
+      {
          //
          sprintf(msg, "%s", MESSAGES[L_TIME]);
          DrawText(msg, 0, set_offset, y_offset, gl_color_selected, 1);
@@ -159,17 +170,21 @@ u32 Setting_window(void) {
          DrawText(msg, 0, x_offset + 12 * 6 + 15, y_offset + line_x * 2,
                   (addon_sel == 4) ? gl_color_selected : gl_color_text, 1);
 
-         //
+         //--------------------------------//
+         // Displaying the language option //
+         //--------------------------------//
+         // Display the option's name
          sprintf(msg, "%s", MESSAGES[L_LANG]);
          DrawText(msg, 0, set_offset, y_offset + line_x * 3, gl_color_selected, 1);
-         Draw_select_icon(x_offset, y_offset + line_x * 3, (language_sel == 0x0));
-         Draw_select_icon(x_offset + 12 * 6, y_offset + line_x * 3, (language_sel == 0x1));
-         sprintf(msg, "%s", LANGUAGES[0]);
-         DrawText(msg, 0, x_offset + 15, y_offset + line_x * 3,
-                  ((language_sel == 0) && currstate && (2 == select)) ? gl_color_selected : gl_color_text, 1);
-         sprintf(msg, "%s", LANGUAGES[1]);
-         DrawText(msg, 0, x_offset + 12 * 6 + 15, y_offset + line_x * 3,
-                  ((language_sel == 1) && currstate && (2 == select)) ? gl_color_selected : gl_color_text, 1);
+         // Display the left arrow
+         DrawPic((u16*)gImage_left_arr, x_offset, y_offset + line_x * 3 - 1, 15, 15, 1, T_COLOR, 1);
+         // Clear the space where we'll display the language name with the background
+         ClearWithBG((u16*)gImage_SET, x_offset + 18, y_offset + line_x * 3, 17 * 6, 13, 1);
+         // Display the language's name
+         sprintf(msg, "%s", LANGUAGES[language_sel]);
+         DrawText(msg, 0, x_offset + 18, y_offset + line_x * 3, gl_color_text, 1);
+         // Display the right arrow
+         DrawPic((u16*)gImage_right_arr, x_offset + 17 * 6 + 21, y_offset + line_x * 3 - 1, 15, 15, 1, T_COLOR, 1);
 
          //
          VBlankIntrWait();
@@ -251,8 +266,9 @@ u32 Setting_window(void) {
       }
 
       currstate = Set_OK;
-      switch (currstate) {
-         case 0:  // initial state
+      switch (currstate)
+      {
+         case 0: // initial state
             // get date and time
             rtc_enable();
             rtc_get(datetime);
@@ -575,7 +591,8 @@ u32 Setting_window(void) {
             break;
          case 1:  // edit state
             // if(Set_OK_line==0) {
-            if (re_show) {
+            if (re_show)
+            {
                if (select == 0) {
                   ClearWithBG((u16*)gImage_SET, x_offset, y_offset, 23 * 6, 13, 1);
                   switch (edit_pos) {
@@ -894,7 +911,8 @@ u32 Setting_window(void) {
             scanKeys();
             keys = keysDown();
             u16 keysrepeat = keysDownRepeat();
-            if (keysrepeat & KEY_UP) {
+            if (keysrepeat & KEY_UP)
+            {
                if (select == 0) {
                   switch (edit_pos) {
                      case 2:
@@ -1377,7 +1395,9 @@ u32 Setting_window(void) {
                   }
                } else if (select == 2)  // lang
                {
-                  language_sel = 1;
+                  language_sel++;
+                  if (language_sel > N_LANGUAGES - 1)
+                     language_sel = 0;
                } else if (select == 3) {
                   engine_pos = 1;
                } else if (select == 4) {
@@ -1407,7 +1427,9 @@ u32 Setting_window(void) {
                   }
                } else if (select == 2)  // lang
                {
-                  language_sel = 0;
+                  language_sel--;
+                  if (language_sel < 0)
+                     language_sel = N_LANGUAGES - 1;
                } else if (select == 3) {
                   engine_pos = 0;
                } else if (select == 4) {
@@ -1501,11 +1523,7 @@ u32 Setting_window(void) {
 //---------------------------------------------------------------------------------
 void save_setw_info(void) {
    u32 address;
-   if (language_sel == 0x0) {  // english
-      SET_info_buffer[assress_language] = 0xE1E1;
-   } else {
-      SET_info_buffer[assress_language] = 0xE2E2;
-   }
+   SET_info_buffer[assress_language] = 0xE1E1 + language_sel;
    SET_info_buffer[assress_v_reset] = v_reset;
    SET_info_buffer[assress_v_rts] = v_rts;
    SET_info_buffer[assress_v_sleep] = v_sleep;

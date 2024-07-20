@@ -1322,14 +1322,16 @@ u32 IWRAM_CODE Loadfile2PSRAM(TCHAR* filename) {
 void CheckLanguage(void) {
    // read setting
    gl_select_lang = Read_SET_info(assress_language);
-   if ((gl_select_lang != 0xE1E1) && (gl_select_lang != 0xE2E2)) {
+   if (gl_select_lang < 0xE1E1 || gl_select_lang > 0xE1E1 + N_LANGUAGES - 1)
+   {
       gl_select_lang = 0xE1E1;
    }
+
    u8 res;
-   if (gl_select_lang == 0xE1E1)  // english
-      res = load_language("/.config/LANG/english.txt");
-   else
-      res = load_language("/.config/LANG/french.txt");
+   char path[40];
+   gl_select_lang -= 0xE1E1;
+   sprintf(path, "%s%s", "/.config/LANG/", LANG_PATHS[gl_select_lang]);
+   res = load_language(path);
 
    if (!res)
       DrawText("Error while reading lang file.", 30, 1, 80, gl_color_text, true);
@@ -3084,7 +3086,7 @@ load_file:
                   f_close(&gfile);
                   SetTrimSize(pReadCache, gamefilesize, 0x20000, 0x0, SAVEMODE);
 
-                  if ((gl_engine_sel == 0) || (gl_select_lang == 0xE2E2)) {
+                  if (gl_engine_sel == 0) { //|| (gl_select_lang == 0xE2E2)) {
                   get_find:
                      FAT_table_buffer[0x1F4 / 4] = SET_PARAMETER_MODE;
                      Send_FATbuffer(FAT_table_buffer, 1);

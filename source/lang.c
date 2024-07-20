@@ -7,9 +7,17 @@ char* MESSAGES[N_MESSAGES];
 char* MENU_BOOT[N_BOOT];
 char* MENU_NOR[N_NOR];
 
-char* LANGUAGES[2] = {
-   "English",
-   "Français"
+char* LANGUAGES[N_LANGUAGES] = {
+  // The language name must fit in 17 characters and should be centered inthere
+  // So insert enough space before the name so that it is centered in a 20 characters space
+  //                 // <- 17 characters
+   "    English",
+   "    Français"
+};
+
+char* LANG_PATHS[N_LANGUAGES] = {
+   "english.txt",
+   "french.txt"
 };
 
 unsigned char* GLOBAL_FONT = (unsigned char*)COZETTE_FNT;

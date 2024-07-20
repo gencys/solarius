@@ -613,12 +613,7 @@ u32 Change2cht_folder(u32 chtname) {
       folder_name = (TCHAR*)"2800";
    }
 
-   if (gl_select_lang == 0xE1E1)  // english
-   {
-      sprintf(currentpath, "/.config/CHEAT/Eng/%s", folder_name);
-   } else {
-      sprintf(currentpath, "/.config/CHEAT/Chn/%s", folder_name);
-   }
+   sprintf(currentpath, "/.config/CHEAT/Eng/%s", folder_name);
    res = f_chdir(currentpath);
    return res;
 }

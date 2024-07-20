@@ -103,6 +103,7 @@ extern char* MENU_BOOT[N_BOOT];
 extern char* MENU_NOR[N_NOR];
 
 extern char* LANGUAGES[N_LANGUAGES];
+extern char* LANG_PATHS[N_LANGUAGES];
 
 // ASCII Font
 extern unsigned char* GLOBAL_FONT;
