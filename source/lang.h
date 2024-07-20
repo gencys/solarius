@@ -1,124 +1,114 @@
+#include <gba_base.h>
+
 #ifndef _LANG_H
 #define _LANG_H
 
-extern char* gl_init_error;
-extern char* gl_power_off;
-extern char* gl_init_ok;
-extern char* gl_Loading;
-extern char* gl_file_overflow;
+#define N_LANGUAGES 2
+#define N_MESSAGES 81
+#define N_BOOT 6
+#define N_NOR 5
 
-extern char* gl_theme_credit;
-extern char* gl_theme_credit2;
+#define INIT_ERR "Failed to initialize microSD card."
+#define POWER_OFF "Power off the console."
+#define INIT_OK "microSD card initialization successful."
+#define LOADING "Loading..."
 
-extern char* gl_menu_btn;
-extern char* gl_lastest_game;
+#define CREDIT_1 "Solarius v1.0"
+#define CREDIT_2 "by Gencys."
 
-extern char* gl_writing;
-extern char* gl_time;
-extern char* gl_Mon;
-extern char* gl_Tues;
-extern char* gl_Wed;
-extern char* gl_Thur;
-extern char* gl_Fri;
-extern char* gl_Sat;
-extern char* gl_Sun;
+#define L_INIT_ERR 0
+#define L_POWER_OFF 1
+#define L_INIT_OK 2
+#define L_LOADING 3
+#define L_F_OVERFLOW 4
+#define L_MENU_BTN 5
+#define L_WRITING 6
+#define L_SELECT_LATEST 7
+#define L_TIME 8
+#define L_MONDAY 9
+#define L_TUESDAY 10
+#define L_WEDNESDAY 11
+#define L_THURSDAY 12
+#define L_FRIDAY 13
+#define L_SATURDAY 14
+#define L_SUNDAY 15
+#define L_ADDON 16
+#define L_RESET 17
+#define L_SAVESTATE 18
+#define L_SLEEP 19
+#define L_CHEAT 20
+#define L_SLEEP_K 21
+#define L_MENU_K 22
+#define L_LANG 23
+#define L_SET 24
+#define L_OK 25
+#define L_DISCLAIMER_OK 26
+#define L_WARN_TIME 27
+#define L_FINAL_WARN 28
+#define L_CHECK_SAVE 29
+#define L_CREATE_SAVE 30
+#define L_CHECK_RTS 31
+#define L_CREATE_RTS 32
+#define L_CHECK_PATCH 33
+#define L_CREATE_PATCH 34
+#define L_WAIT 35
+#define L_LOAD_ROM 36
+#define L_NO_GBA 37
+#define L_ENGINE 38
+#define L_FP_ENGINE 39
+#define L_RECENT 40
+#define L_RECENT_LIST 41
+#define L_MORE_OPT 42
+#define L_COLD_START 43
+#define L_DEL_FILE 44
+#define L_DEL_SAVE 45
+#define L_MANUAL 46
+#define L_NO_RECENT 47
+#define L_RTC 48
+#define L_OPEN 49
+#define L_CLOSE 50
+#define L_HARDRESET 51
+#define L_BACKUP 52
+#define L_FOLDER_ERR 53
+#define L_FILE_ERR 54
+#define L_BACKUP_ERR 55
+#define L_SAVE_ERR 56
+#define L_READ_SAVE_ERR 57
+#define L_WRITE_SAVE_ERR 58
+#define L_RTS_ERR 59
+#define L_COPY_SAVE 60
+#define L_SAVING 61
+#define L_SAVE 62
+#define L_AUTO_SAVE 63
+#define L_MODE_B 64
+#define L_RUMBLE 65
+#define L_RAM 66
+#define L_CART 67
+#define L_LED 68
+#define L_ENABLE_LED 69
+#define L_BREATHE_LED 70
+#define L_SD_LED 71
+#define L_NOR_FULL 72
+#define L_SAV_LOADED 73
+#define L_SAV_SAVED 74
+#define L_OVERWRITE 75
+#define L_NO_SAV 76
+#define L_COPY_ROM 77
+#define L_GEN_EMU 78
+#define L_ENABLED 79
+#define L_DISABLED 80
 
-extern char* gl_addon;
-extern char* gl_reset;
-extern char* gl_rts;
-extern char* gl_sleep;
-extern char* gl_cheat;
+extern char* MESSAGES[N_MESSAGES];
+extern char* MENU_BOOT[N_BOOT];
+extern char* MENU_NOR[N_NOR];
 
-extern char* gl_hot_key;
-extern char* gl_hot_key2;
-
-extern char* gl_language;
-extern char* gl_en_lang;
-extern char* gl_fr_lang;
-
-extern char* gl_set_btn;
-extern char* gl_ok_btn;
-
-extern char* gl_formatnor_info1;
-extern char* gl_formatnor_info2;
-
-extern char* temp;
-
-extern char* gl_check_sav;
-extern char* gl_make_sav;
-
-extern char* gl_check_RTS;
-extern char* gl_make_RTS;
-
-extern char* gl_check_pat;
-extern char* gl_make_pat;
-
-extern char* gl_loading_game;
-extern char* gl_engine;
-extern char* gl_use_engine;
-
-extern char* gl_recently_play;
-
-extern char* gl_START_help;
-extern char* gl_SELECT_help;
-extern char* gl_L_A_help;
-extern char* gl_LSTART_help;
-extern char* gl_online_manual;
-
-extern char* gl_no_game_played;
-
-extern char* gl_ingameRTC;
-extern char* gl_ingameRTC_open;
-extern char* gl_ingameRTC_close;
-
-extern char* gl_lang_toggle_reset;
-extern char* gl_lang_toggle_backup;
-
-extern char* gl_error_0;
-extern char* gl_error_1;
-extern char* gl_error_2;
-extern char* gl_error_3;
-extern char* gl_error_4;
-extern char* gl_error_5;
-extern char* gl_error_6;
-
-extern char* gl_save_sav;
-extern char* gl_save_ing;
-
-extern char* gl_save;
-extern char* gl_auto_save;
-
-extern char* gl_modeB_INITstr;
-extern char* gl_modeB_RUMBLE;
-extern char* gl_modeB_RAM;
-extern char* gl_modeB_LINK;
-
-extern char* gl_led;
-extern char* gl_led_open;
-
-extern char* gl_Breathing_light;
-extern char* gl_SD_working;
-
-extern char* gl_NOR_full;
-extern char* gl_save_loaded;
-extern char* gl_save_saved;
-extern char* gl_file_exist;
-extern char* gl_file_noexist;
-
-extern char** gl_rom_menu;
-extern char** gl_nor_op;
-
-extern char* gl_enabled;
-extern char* gl_disabled;
-
-extern char* gl_copying_data;
-extern char* gl_generating_emu;
+extern char* LANGUAGES[N_LANGUAGES];
+extern char* LANG_PATHS[N_LANGUAGES];
 
 // ASCII Font
 extern unsigned char* GLOBAL_FONT;
 extern int* FONT_START_CHAR;
 
-void LoadEnglish(void);
-void LoadFrench(void);
+u8 load_language(char* path);
 
 #endif

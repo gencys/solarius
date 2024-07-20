@@ -11,6 +11,18 @@
 #include "ezkernel.h"
 #include "lang.h"
 
+#include "utils.h"
+
+#ifdef DARK
+#include "dark/left_arr.h"
+#include "dark/right_arr.h"
+#define T_COLOR 0x0000
+#else
+#include "light/left_arr.h"
+#include "light/right_arr.h"
+#define T_COLOR 0x7FFF
+#endif
+
 // extern const unsigned char __attribute__((aligned(4)))gImage_SET[76800];
 extern u16 gl_select_lang;
 extern u16 gl_engine_sel;
@@ -102,11 +114,11 @@ u32 Setting_window(void) {
 
    u32 line_x = 17;
 
-   if (gl_select_lang == 0xE1E1) {
+   if (gl_select_lang < 0 || gl_select_lang > N_LANGUAGES - 1)
       language_sel = 0;
-   } else {
-      language_sel = 1;
-   }
+   else
+      language_sel = gl_select_lang;
+
    v_reset = Read_SET_info(assress_v_reset);
    v_rts = Read_SET_info(assress_v_rts);
    v_sleep = Read_SET_info(assress_v_sleep);
@@ -129,55 +141,59 @@ u32 Setting_window(void) {
    while (1) {
       VBlankIntrWait();
 
-      if (re_show) {
+      if (re_show)
+      {
          //
-         sprintf(msg, "%s", gl_time);
+         sprintf(msg, "%s", MESSAGES[L_TIME]);
          DrawText(msg, 0, set_offset, y_offset, gl_color_selected, 1);
 
          //
-         sprintf(msg, "%s", gl_addon);
+         sprintf(msg, "%s", MESSAGES[L_ADDON]);
          DrawText(msg, 0, set_offset, y_offset + line_x, gl_color_selected, 1);
 
          Draw_select_icon(x_offset, y_offset + line_x, v_reset);
-         sprintf(msg, "%s", gl_reset);
-         DrawText(msg, 0, x_offset + 15, y_offset + line_x, (addon_sel == 0) ? gl_color_selected : gl_color_text,
-                      1);
+         sprintf(msg, "%s", MESSAGES[L_RESET]);
+         DrawText(msg, 0, x_offset + 15, y_offset + line_x, (addon_sel == 0) ? gl_color_selected : gl_color_text, 1);
 
          Draw_select_icon(x_offset + 12 * 6, y_offset + line_x, v_rts);
-         sprintf(msg, "%s", gl_rts);
+         sprintf(msg, "%s", MESSAGES[L_SAVESTATE]);
          DrawText(msg, 0, x_offset + 12 * 6 + 15, y_offset + line_x,
-                      (addon_sel == 1) ? gl_color_selected : gl_color_text, 1);
+                  (addon_sel == 1) ? gl_color_selected : gl_color_text, 1);
          VBlankIntrWait();
          Draw_select_icon(x_offset, y_offset + line_x * 2, v_sleep);
-         sprintf(msg, "%s", gl_sleep);
-         DrawText(msg, 0, x_offset + 15, y_offset + line_x * 2,
-                      (addon_sel == 3) ? gl_color_selected : gl_color_text, 1);
+         sprintf(msg, "%s", MESSAGES[L_SLEEP]);
+         DrawText(msg, 0, x_offset + 15, y_offset + line_x * 2, (addon_sel == 3) ? gl_color_selected : gl_color_text,
+                  1);
          VBlankIntrWait();
          Draw_select_icon(x_offset + 12 * 6, y_offset + line_x * 2, v_cheat);
-         sprintf(msg, "%s", gl_cheat);
+         sprintf(msg, "%s", MESSAGES[L_CHEAT]);
          DrawText(msg, 0, x_offset + 12 * 6 + 15, y_offset + line_x * 2,
-                      (addon_sel == 4) ? gl_color_selected : gl_color_text, 1);
+                  (addon_sel == 4) ? gl_color_selected : gl_color_text, 1);
 
-         //
-         sprintf(msg, "%s", gl_language);
+         //--------------------------------//
+         // Displaying the language option //
+         //--------------------------------//
+         // Display the option's name
+         sprintf(msg, "%s", MESSAGES[L_LANG]);
          DrawText(msg, 0, set_offset, y_offset + line_x * 3, gl_color_selected, 1);
-         Draw_select_icon(x_offset, y_offset + line_x * 3, (language_sel == 0x0));
-         Draw_select_icon(x_offset + 12 * 6, y_offset + line_x * 3, (language_sel == 0x1));
-         sprintf(msg, "%s", gl_en_lang);
-         DrawText(msg, 0, x_offset + 15, y_offset + line_x * 3,
-                      ((language_sel == 0) && currstate && (2 == select)) ? gl_color_selected : gl_color_text, 1);
-         sprintf(msg, "%s", gl_fr_lang);
-         DrawText(msg, 0, x_offset + 12 * 6 + 15, y_offset + line_x * 3,
-                      ((language_sel == 1) && currstate && (2 == select)) ? gl_color_selected : gl_color_text, 1);
+         // Display the left arrow
+         DrawPic((u16*)gImage_left_arr, x_offset, y_offset + line_x * 3 - 1, 15, 15, 1, T_COLOR, 1);
+         // Clear the space where we'll display the language name with the background
+         ClearWithBG((u16*)gImage_SET, x_offset + 18, y_offset + line_x * 3, 17 * 6, 13, 1);
+         // Display the language's name
+         sprintf(msg, "%s", LANGUAGES[language_sel]);
+         DrawText(msg, 0, x_offset + 18, y_offset + line_x * 3, gl_color_text, 1);
+         // Display the right arrow
+         DrawPic((u16*)gImage_right_arr, x_offset + 17 * 6 + 21, y_offset + line_x * 3 - 1, 15, 15, 1, T_COLOR, 1);
 
          //
          VBlankIntrWait();
-         sprintf(msg, "%s", gl_engine);
+         sprintf(msg, "%s", MESSAGES[L_ENGINE]);
          DrawText(msg, 0, set_offset, y_offset + line_x * 4, gl_color_selected, 1);
          Draw_select_icon(x_offset, y_offset + line_x * 4, (engine_sel == 0x1));
-         sprintf(msg, "%s", gl_use_engine);
-         DrawText(msg, 0, x_offset + 15, y_offset + line_x * 4,
-                      (engine_pos == 0) ? gl_color_selected : gl_color_text, 1);
+         sprintf(msg, "%s", MESSAGES[L_FP_ENGINE]);
+         DrawText(msg, 0, x_offset + 15, y_offset + line_x * 4, (engine_pos == 0) ? gl_color_selected : gl_color_text,
+                  1);
          //
 
          ClearWithBG((u16*)gImage_SET, set_offset, y_offset + line_x * 5, 9 * 6, 13, 1);
@@ -189,26 +205,25 @@ u32 Setting_window(void) {
             sprintf(msg, "%s", " LOAD KEY");
             DrawText(msg, 0, set_offset, y_offset + line_x * 6, gl_color_selected, 1);
          } else {
-            sprintf(msg, "%s", gl_hot_key);
+            sprintf(msg, "%s", MESSAGES[L_SLEEP_K]);
             DrawText(msg, 0, set_offset, y_offset + line_x * 5, gl_color_selected, 1);
 
-            sprintf(msg, "%s", gl_hot_key2);
+            sprintf(msg, "%s", MESSAGES[L_MENU_K]);
             DrawText(msg, 0, set_offset, y_offset + line_x * 6, gl_color_selected, 1);
          }
 
          // RTC
-         sprintf(msg, "%s", gl_ingameRTC);
+         sprintf(msg, "%s", MESSAGES[L_RTC]);
          DrawText(msg, 0, set_offset, y_offset + line_x * 7, gl_color_selected, 1);
          Draw_select_icon(x_offset, y_offset + line_x * 7, (gl_ingame_RTC_open_status == 0x1));
          // sprintf(msg,"%s",gl_offRTC_powersave);
          ClearWithBG((u16*)gImage_SET, x_offset + 15, y_offset + line_x * 7, 6 * 6, 13, 1);
          if (gl_ingame_RTC_open_status) {
-            sprintf(msg, "%s", gl_enabled);
+            sprintf(msg, "%s", MESSAGES[L_ENABLED]);
          } else {
-            sprintf(msg, "%s", gl_disabled);
+            sprintf(msg, "%s", MESSAGES[L_DISABLED]);
          }
-         DrawText(msg, 0, x_offset + 15, y_offset + line_x * 7, (RTC_pos == 0) ? gl_color_selected : gl_color_text,
-                      1);
+         DrawText(msg, 0, x_offset + 15, y_offset + line_x * 7, (RTC_pos == 0) ? gl_color_selected : gl_color_text, 1);
 
          u32 offsety;
          for (line = 0; line < 7; line++) {
@@ -241,9 +256,9 @@ u32 Setting_window(void) {
             Clear(202, offsety - 2, 30, 14, clean_color, 1);
 
             if (Set_OK && (line == Set_OK_line)) {
-               sprintf(msg, "%s", gl_ok_btn);
+               sprintf(msg, "%s", MESSAGES[L_OK]);
             } else {
-               sprintf(msg, "%s", gl_set_btn);
+               sprintf(msg, "%s", MESSAGES[L_SET]);
             }
             DrawText(msg, 0, 200 + 5, offsety, gl_color_text, 1);
             VBlankIntrWait();
@@ -251,8 +266,9 @@ u32 Setting_window(void) {
       }
 
       currstate = Set_OK;
-      switch (currstate) {
-         case 0:  // initial state
+      switch (currstate)
+      {
+         case 0: // initial state
             // get date and time
             rtc_enable();
             rtc_get(datetime);
@@ -260,28 +276,28 @@ u32 Setting_window(void) {
             char* wkday;
             switch (UNBCD(datetime[3] & 0x7)) {
                case 0:
-                  wkday = gl_Sun;
+                  wkday = MESSAGES[L_SUNDAY];
                   break;
                case 1:
-                  wkday = gl_Mon;
+                  wkday = MESSAGES[L_MONDAY];
                   break;
                case 2:
-                  wkday = gl_Tues;
+                  wkday = MESSAGES[L_TUESDAY];
                   break;
                case 3:
-                  wkday = gl_Wed;
+                  wkday = MESSAGES[L_WEDNESDAY];
                   break;
                case 4:
-                  wkday = gl_Thur;
+                  wkday = MESSAGES[L_THURSDAY];
                   break;
                case 5:
-                  wkday = gl_Fri;
+                  wkday = MESSAGES[L_FRIDAY];
                   break;
                case 6:
-                  wkday = gl_Sat;
+                  wkday = MESSAGES[L_SATURDAY];
                   break;
                default:
-                  wkday = gl_Sun;
+                  wkday = MESSAGES[L_SUNDAY];
                   break;
             }
 
@@ -575,7 +591,8 @@ u32 Setting_window(void) {
             break;
          case 1:  // edit state
             // if(Set_OK_line==0) {
-            if (re_show) {
+            if (re_show)
+            {
                if (select == 0) {
                   ClearWithBG((u16*)gImage_SET, x_offset, y_offset, 23 * 6, 13, 1);
                   switch (edit_pos) {
@@ -614,28 +631,28 @@ u32 Setting_window(void) {
                   char* wkday;
                   switch (edit_datetime[_WKD]) {
                      case 0:
-                        wkday = gl_Sun;
+                        wkday = MESSAGES[L_SUNDAY];
                         break;
                      case 1:
-                        wkday = gl_Mon;
+                        wkday = MESSAGES[L_MONDAY];
                         break;
                      case 2:
-                        wkday = gl_Tues;
+                        wkday = MESSAGES[L_TUESDAY];
                         break;
                      case 3:
-                        wkday = gl_Wed;
+                        wkday = MESSAGES[L_WEDNESDAY];
                         break;
                      case 4:
-                        wkday = gl_Thur;
+                        wkday = MESSAGES[L_THURSDAY];
                         break;
                      case 5:
-                        wkday = gl_Fri;
+                        wkday = MESSAGES[L_FRIDAY];
                         break;
                      case 6:
-                        wkday = gl_Sat;
+                        wkday = MESSAGES[L_SATURDAY];
                         break;
                      default:
-                        wkday = gl_Sun;
+                        wkday = MESSAGES[L_SUNDAY];
                         break;
                   }
                   sprintf(msg, "20%02d/%02d/%02d %02d:%02d:%02d %s", edit_datetime[_YEAR], edit_datetime[_MONTH],
@@ -894,7 +911,8 @@ u32 Setting_window(void) {
             scanKeys();
             keys = keysDown();
             u16 keysrepeat = keysDownRepeat();
-            if (keysrepeat & KEY_UP) {
+            if (keysrepeat & KEY_UP)
+            {
                if (select == 0) {
                   switch (edit_pos) {
                      case 2:
@@ -1377,7 +1395,9 @@ u32 Setting_window(void) {
                   }
                } else if (select == 2)  // lang
                {
-                  language_sel = 1;
+                  language_sel++;
+                  if (language_sel > N_LANGUAGES - 1)
+                     language_sel = 0;
                } else if (select == 3) {
                   engine_pos = 1;
                } else if (select == 4) {
@@ -1407,7 +1427,9 @@ u32 Setting_window(void) {
                   }
                } else if (select == 2)  // lang
                {
-                  language_sel = 0;
+                  language_sel--;
+                  if (language_sel < 0)
+                     language_sel = N_LANGUAGES - 1;
                } else if (select == 3) {
                   engine_pos = 0;
                } else if (select == 4) {
@@ -1501,11 +1523,7 @@ u32 Setting_window(void) {
 //---------------------------------------------------------------------------------
 void save_setw_info(void) {
    u32 address;
-   if (language_sel == 0x0) {  // english
-      SET_info_buffer[assress_language] = 0xE1E1;
-   } else {
-      SET_info_buffer[assress_language] = 0xE2E2;
-   }
+   SET_info_buffer[assress_language] = 0xE1E1 + language_sel;
    SET_info_buffer[assress_v_reset] = v_reset;
    SET_info_buffer[assress_v_rts] = v_rts;
    SET_info_buffer[assress_v_sleep] = v_sleep;

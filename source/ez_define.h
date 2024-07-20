@@ -1,9 +1,17 @@
 #define MAX_pReadCache_size 0x20000
-#define MAX_files 0x200
-#define MAX_folder 0x100
+#define MAX_FILES 0x200
+#define MAX_FOLDER 0x100
 #define MAX_NOR 0x40
 
-#define MAX_path_len 0x100
+#ifndef true
+#define true 1
+#endif
+
+#ifndef false
+#define false 0
+#endif
+
+#define MAX_PATH_LEN 0x100
 
 #define FAT_table_size 0x400
 // #define FAT_table_SAV_offset 0x200
@@ -40,7 +48,9 @@
 #define NOR_info_offset 0x7A0000
 #define SET_info_offset 0x7B0000
 
-#define SAVER_FOLDER "/SYSTEM/SAVER"
+#define SAVER_FOLDER "/.config/SAVER"
+#define RECENT_FILE "/.config/RECENT.TXT"
+#define BACKUP_SAVER "/.config/BACKUP/SAVER"
 
 #define DMA_COPY_MODE 0X1
 #define SET_PARAMETER_MODE 0x2
@@ -77,8 +87,6 @@
 #define newomega_top_bin_size 0x535bc  ////0x536d0//0x534A8//
 #define newomega_top_bin_address (void*)0x08195000
 
-extern const unsigned char gImage_English_manual[9800] __attribute__((aligned(4)));
-extern const unsigned char gImage_Chinese_manual[9800] __attribute__((aligned(4)));
 extern const unsigned char gImage_HELP[76800] __attribute__((aligned(4)));
 extern const unsigned char gImage_icons[1344] __attribute__((aligned(4)));
 extern const unsigned char gImage_MENU[36960] __attribute__((aligned(4)));

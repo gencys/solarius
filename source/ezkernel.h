@@ -33,7 +33,7 @@ typedef enum {
    SET2_win = 3,
    HELP = 4,
 } PAGE_NUM;
-//----------------------------
+
 extern DWORD Get_NextCluster(FFOBJID* obj, DWORD clst);
 extern DWORD ClustToSect(FATFS* fs, DWORD clst);
 
@@ -59,7 +59,6 @@ extern u16 gl_color_btn_clean;
 u32 Setting_window(void);
 u32 Setting_window2(void);
 
-void delay(u32 R0);
 u32 LoadRTSfile(TCHAR* filename);
 void ShowTime(u32 page_num, u32 page_mode);
 u8 NOR_list_MENU(u32 show_offset, u32 file_select);
