@@ -1,4 +1,4 @@
-## SOLARIUS
+# SOLARIUS
 
 Solarius is a custom kernel for the EZFlash Omega Definitive edition. It was forked from [Simple](https://github.com/Sterophonick/omega-de-kernel) by [Sterophonick](https://github.com/Sterophonick).
 
@@ -8,7 +8,7 @@ The goal of this custom kernel is three-fold:
    2. Flashcart UIs don't need to be ugly, let's make a nice one (still ongoing).
    3. Make the cart available in more languages.
 
-### How to use
+## How to use
 
 > [!CAUTION]
 > This is a kernel for the **Omega DE**, not for the first Omega cartridge.
@@ -42,11 +42,11 @@ Much like the Simple kernel, there are two variants to Solarius, a dark mode and
 
 Now you can simply organize your games however you wish on your SD card :)
 
-#### Updating the firmware
+### Updating the firmware
 
 The only way to update the firmware is via the official kernel from EZflash. To do that first rename the `.config` file on your SD card to `SYSTEM` and follow the update instructions from EZFlash's kernel. Once that's done you can reinstall Solarius by following the steps above.
 
-### Need support for a new language
+## Need support for a new language
 
 I unfortuantely only speak English and French so these are the only two languages available right now, but I want more! The goal is to support as many languages as possible so that the Omega DE cartridge can be used by anyone.
 
@@ -54,16 +54,16 @@ So if you feel up for it, please take a look at the files in the `LANG` director
 
 Once that's done you can submit a PR on this repo with your translation so that we can add it to Solarius!
 
-### What's new?
+## What's new?
 
-#### v1.0
+### v1.0
 
    - Removed the unecessary QR code for the online manual
    - Changed the font to a nicer one ([Cozette](https://github.com/slavfox/Cozette))
    - Added possibility to load more languages
    - Only show visible and useful folders
 
-### Credits
+## Credits
 
 This custom kernel is based on the Simple kernel made by [Sterophonick](https://github.com/Sterophonick), so full credit to him for the work he did on it!
 
