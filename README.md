@@ -37,7 +37,10 @@ Much like the Simple kernel, there are two variants to Solarius, a dark mode and
    10. Put your Omega DE in your console and boot the console **while holding the L trigger** until a screen showing an update progress shows up.
    11. You're done ! Congrats, you did it ! You can be proud of yourself ;)
 
-An optional last step is to delete the `ezkernalnew.bin` file from your Omega DE's SD card, either by putting it into your computer, or by deleting is directly from your console by selecting it and pressing `L + Start`.
+> [!NOTE]
+> An optional last step is to delete the `ezkernalnew.bin` file from your Omega DE's SD card, either by putting it into your computer, or by deleting is directly from your console by selecting it and pressing `L + Start`.
+
+Now you can simply organize your games however you wish on your SD card :)
 
 #### Updating the firmware
 
