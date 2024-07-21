@@ -19,26 +19,29 @@ Much like the Simple kernel, there are two variants to Solarius, a dark mode and
 
    1. Enable "Show hidden files" on your computer.
    2. Choose and download the file you need depdending on the mode you want:
-      - `ezkernelnew_dark.zip` for the dark mode, or
-      - `ezkernelnew_light.zip` for the light mode
+      - `Solarius_DARK.zip` for the dark mode from [here](https://github.com/gencys/solarius/releases/latest), or
+      - `Solarius_LIGHT.zip` for the light mode from [here](https://github.com/gencys/solarius/releases/latest).
    3. Extract your zip file somehwere on your computer.
    4. The file that you extracted should contain:
-      - A folder named `BACKUP`
-      - A folder named `LANG`
+      - A folder named `SYSTEM`
       - A file named `ezkernelnew.bin`
    5. Pop your Omega DE's SD card in your computer.
-   6. On the SD card, you should have a folder named `SYSTEM`, rename it into `.config` (yes, the dot before config is intentional)
+   6. Move the `SYSTEM` folder onto your SD card, and rename it into `.config` (yes, the dot before config is intentional)
       - Your computer may warn you that you are about to create a hidden folder, that's the goal!
       - It may also warn you that you're modifying the folder's extension, that's okay, we know what we are doing, we are professionals.
-   7. In the file you extracted earlier, move `LANG` and `BACKUP` into `.config` which you just created.
-      - If you don't see `.config` remember to enable "Show hidden files" on your computer (google it, the procedure for that will depend on which operating system you use).
+   7. After the step above, if you don't see the folder `.config` remember to enable "Show hidden files" on your computer (google it, the procedure for that will depend on which operating system you use).
    8. Move `ezkernelnew.bin` next to `.config` (*next to it*, not *in* it).
-   9. Safely remove your SD card from your computer and put it back in your Omega DE.
-   10. Put your Omega DE in your console and boot the console **while holding the L trigger** until a screen showing an update progress shows up.
-   11. You're done ! Congrats, you did it ! You can be proud of yourself ;)
+   9. On your SD card you should have folders names `IMGS`, `CHEAT`, `PATCH`, `RTS` and `SAVER` (if you're missing one don't sweat it). Move them all in the `.config` folder you created.
+      - Your computer may warn you that some folders already exist, in this case click the button to merge the folders.
+   10. Safely eject and remove your SD card from your computer and put it back in your Omega DE.
+   11. Put your Omega DE in your console and boot the console **while holding the L trigger** until a screen showing an update progress shows up.
+   12. You're done ! Congrats, you did it ! You can be proud of yourself ;)
 
 > [!NOTE]
 > An optional last step is to delete the `ezkernalnew.bin` file from your Omega DE's SD card, either by putting it into your computer, or by deleting is directly from your console by selecting it and pressing `L + Start`.
+
+> [!TIP]
+> If you want to install the cheat library and/or thumbnail pack from EZFlash later on, you can download them and put the folders you get in the `.config` folder on your SD card.
 
 Now you can simply organize your games however you wish on your SD card :)
 
