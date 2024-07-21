@@ -245,7 +245,7 @@ void DrawText(char* str, u16 len, u16 x, u16 y, u16 color, u8 isDrawDirect) {
  * @param str
  */
 void ShowbootProgress(char* str) {
-   u8 str_len = strlen(str);
+   u32 str_len = strlen(str);
    Clear(0, 160 - 15, 240, 15, gl_color_cheat_black, 1);
    DrawText(MESSAGES[L_LOAD_ROM], 0, (240 - strlen(MESSAGES[L_LOAD_ROM]) * 6) / 2, 72, 0x7FFF, 1);
    DrawText(str, 0, (240 - str_len * 6) / 2, 160 - 15, 0x7FFF, 1);

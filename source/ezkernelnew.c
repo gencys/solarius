@@ -938,15 +938,57 @@ u32 show_recently_play(void) {
    return return_val;
 }
 
+void insert_string(char* str, char** list, u8 size)
+{
+   u8 i;
+   int get = 1;
+   u32 len;
+   for (i = 0; i < size; i++) {
+      get = strcmp(str, list[i]);
+      if (get == 0) {
+         u32 j;
+         for (j = i; j > 0; j--)
+         {
+            len = strlen(list[j - 1]);
+            list[j] = realloc(list[j], (len + 1) * sizeof(char));
+            dmaCopy(list[j - 1], list[j], (len + 1) * sizeof(char));
+            list[j][len] = '\0';
+         }
+         break;
+      }
+   }
+
+   if (get != 0) {
+      if (size == 10) {
+         for (i = 9; i > 0; i--) {
+            len = strlen(list[i - 1]);
+            list[i] = realloc(list[i], (len + 1) * sizeof(char));
+            dmaCopy(list[i - 1], list[i], (len + 1) * sizeof(char));
+            list[i][len] = '\0';
+         }
+      } else if (size) {
+         for (i = size; i > 0; i--)
+         {
+            len = strlen(list[i - 1]);
+            list[i] = realloc(list[i], (len + 1) * sizeof(char));
+            dmaCopy(list[i - 1], list[i], (len + 1) * sizeof(char));
+            list[i][len] = '\0';
+         }
+      }
+   }
+
+   len = strlen(str);
+   list[0] = (char* )realloc(list[0], (len + 1) * sizeof(char));
+   dmaCopy(str, list[0], (len + 1) * sizeof(char));  // write first one
+   list[0][len] = '\0';
+}
+
 void Make_recently_play_file(TCHAR* path, TCHAR* gamefilename) {
    int res;
-   u32 i;
-   u32 count;
-   int get = 1;
+   u8 i;
+   u8 count;
    char buf[512];
 
-   // res=f_chdir("/.config");
-   // is in SAVER
    count = get_count();
 
    memset(buf, 0x00, 512);
@@ -956,41 +998,15 @@ void Make_recently_play_file(TCHAR* path, TCHAR* gamefilename) {
       sprintf(buf, "%s/%s", path, gamefilename);
    }
 
-   for (i = 0; i < count; i++) {
-      get = strcmp(buf, p_recently_play[i]);
-      if (get == 0) {
-         u32 j;
-         for (j = i; j > 0; j--) {
-            memset(p_recently_play[j], 0x00, 512);
-            dmaCopy(&(p_recently_play[j - 1]), &(p_recently_play[j]), 512);
-         }
-         break;
-      }
-   }
+   insert_string(buf, p_recently_play, count);
 
-   if (get != 0) {
-      if (count == 10) {
-         for (i = 9; i > 0; i--) {
-            memset(p_recently_play[i], 0x00, 512);
-            dmaCopy(&(p_recently_play[i - 1]), &(p_recently_play[i]), 512);
-         }
-      } else if (count) {
-         for (i = count; i > 0; i--) {
-            memset(p_recently_play[i], 0x00, 512);
-            dmaCopy(&(p_recently_play[i - 1]), &(p_recently_play[i]), 512);
-         }
-      }
-   }
-
-   dmaCopy(buf, &(p_recently_play[0]), 512);  // write first one
-
-   res = f_open(&gfile, "/.config/RECENT.txt", FA_WRITE | FA_OPEN_ALWAYS);
+   res = f_open(&gfile, RECENT_FILE, FA_WRITE | FA_OPEN_ALWAYS);
    if (res != FR_OK) {
       return;
    }
    f_lseek(&gfile, 0x0000);
    for (i = 0; i < count + 1; i++) {
-      res = f_printf(&gfile, "%s\n", &(p_recently_play[i]));
+      res = f_printf(&gfile, "%s\n", p_recently_play[i]);
       if (res < 0)
       {
          ShowbootProgress("Error adding recent");

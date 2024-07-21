@@ -56,7 +56,10 @@ u32 get_file_lines(char* path, char** list, u32 size, u8 keep_open, u8 from_star
    {
       trim(buf);
       len = strlen(buf);
-      list[i] = realloc(list[i], len + 1);
+      if (!len)
+         continue;
+
+      list[i] = realloc(list[i], (len + 1) * sizeof(char));
       dmaCopy(buf, list[i], len + 1);
       memset(buf, 0x00, 512);
 
